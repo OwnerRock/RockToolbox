@@ -1,24 +1,14 @@
 $Url = 'https://raw.githubusercontent.com/Spidermooon/RockToolbox/main/RockToolbox.ps1'
 
-$ErrorActionPreference = 'Stop'
+$inner = @'
+$ProgressPreference = 'SilentlyContinue'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$d = Join-Path $env:LOCALAPPDATA 'RockToolbox'
+New-Item -ItemType Directory -Path $d -Force | Out-Null
+$p = Join-Path $d 'RockToolbox.ps1'
+try { Invoke-WebRequest -Uri '{URL}' -OutFile $p -UseBasicParsing } catch { }
+if (Test-Path -LiteralPath $p) { & $p } else { Write-Host 'Could not download Rock Toolbox - check your internet.'; Read-Host 'Press Enter to close' }
+'@.Replace('{URL}', $Url)
 
-$dir = Join-Path $env:LOCALAPPDATA 'RockToolbox'
-if (-not (Test-Path -LiteralPath $dir)) { New-Item -ItemType Directory -Path $dir -Force | Out-Null }
-$dst = Join-Path $dir 'RockToolbox.ps1'
-
-Write-Host 'Downloading Rock Toolbox...' -ForegroundColor Cyan
-try {
-    Invoke-WebRequest -Uri $Url -OutFile $dst -UseBasicParsing
-} catch {
-    if (Test-Path -LiteralPath $dst) {
-        Write-Host 'Could not download - starting the last saved copy.' -ForegroundColor Yellow
-    } else {
-        Write-Host ('Download failed: ' + $_.Exception.Message) -ForegroundColor Red
-        return
-    }
-}
-
-Start-Process -FilePath 'powershell.exe' -Verb RunAs -ArgumentList @(
-    '-NoProfile', '-ExecutionPolicy', 'Bypass', '-STA', '-File', ('"' + $dst + '"')
-)
+$enc = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($inner))
+Start-Process -FilePath 'powershell.exe' -Verb RunAs -ArgumentList '-NoProfile', '-ExecutionPolicy', 'Bypass', '-STA', '-EncodedCommand', $enc
