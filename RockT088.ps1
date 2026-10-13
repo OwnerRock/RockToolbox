@@ -1,0 +1,1 @@
+﻿$script:wpMode      = 'feed'

@@ -1,0 +1,1 @@
+﻿$script:wpCols      = 0
