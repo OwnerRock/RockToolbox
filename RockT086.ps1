@@ -1,0 +1,1 @@
+﻿$script:wpLoaded    = $false

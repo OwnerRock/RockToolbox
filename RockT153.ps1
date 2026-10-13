@@ -1,0 +1,1 @@
+﻿$cmbUnType.SelectedIndex = 0
