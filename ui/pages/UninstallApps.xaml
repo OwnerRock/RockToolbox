@@ -1,0 +1,32 @@
+﻿      <!-- UNINSTALL APPS -->
+      <DockPanel x:Name="pnlUnApps" Visibility="Collapsed">
+        <WrapPanel DockPanel.Dock="Top">
+          <TextBox x:Name="txtUnQuery" Width="240" Height="30" Margin="3" VerticalContentAlignment="Center"
+                   Background="#14171B" Foreground="White" CaretBrush="White" BorderBrush="#35506A" ToolTip="Search installed apps"/>
+          <ComboBox x:Name="cmbUnType" Width="160" Height="30" Margin="3" Foreground="Black" VerticalContentAlignment="Center"/>
+          <Button x:Name="btnUnRefresh" Content="Refresh"/>
+          <Button x:Name="btnUnSelNone" Content="Select none"/>
+          <Button x:Name="btnUnGo" Content="Uninstall selected" Background="#B0343A" Padding="22,6"/>
+          <TextBlock x:Name="txtUnCount" Text="Selected: 0" Foreground="#4FD1FF" FontFamily="Consolas" VerticalAlignment="Center" Margin="10,0"/>
+        </WrapPanel>
+        <TextBlock x:Name="txtUnInfo" DockPanel.Dock="Bottom" Foreground="#9AA0B8" Margin="8,6" TextWrapping="Wrap"
+                   Text="Apps installed on this PC (desktop programs and Store apps). Tick what you want to remove."/>
+        <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+          <ListView x:Name="lvUnApps" Background="#1B1F24" Foreground="#E6E8F2" BorderThickness="0" SelectionMode="Single">
+            <ListView.View>
+              <GridView>
+                <GridViewColumn Width="46">
+                  <GridViewColumn.CellTemplate>
+                    <DataTemplate><CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0"/></DataTemplate>
+                  </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="380"/>
+                <GridViewColumn Header="Version" DisplayMemberBinding="{Binding Version}" Width="130"/>
+                <GridViewColumn Header="Publisher" DisplayMemberBinding="{Binding Publisher}" Width="240"/>
+                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Source}" Width="80"/>
+                <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}" Width="90"/>
+              </GridView>
+            </ListView.View>
+          </ListView>
+        </Border>
+      </DockPanel>

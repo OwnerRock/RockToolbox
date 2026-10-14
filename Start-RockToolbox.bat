@@ -1,11 +1,28 @@
 @echo off
-title Rock Toolbox launcher
-cd /d "%~dp0"
-if exist "RockT250.ps1" goto run
-echo Error: the 250 RockT001-RockT250 .ps1 files are missing next to this .bat
-pause
-exit /b 1
-:run
-powershell -NoProfile -ExecutionPolicy Bypass -Command "Unblock-File -LiteralPath '%~dp0RockToolbox.ps1'; Get-ChildItem -LiteralPath '%~dp0' -File | Where-Object { $_.Name -match '^RockT[0-9]{3}\.ps1$' } | ForEach-Object { Unblock-File -LiteralPath $_.FullName }"
-powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0RockToolbox.ps1"
-if errorlevel 1 pause
+title Rock Toolbox
+setlocal
+
+rem Starts Rock Toolbox. The script asks for Administrator by itself (UAC prompt).
+rem Keep this file next to RockToolbox.ps1 and the src / ui folders.
+
+set "ROCK=%~dp0RockToolbox.ps1"
+
+if not exist "%ROCK%" (
+    echo RockToolbox.ps1 was not found next to this file:
+    echo   %~dp0
+    echo.
+    pause
+    exit /b 1
+)
+
+if not exist "%~dp0src\core\Window.ps1" (
+    echo The "src" folder is missing. Extract the whole zip, do not copy the .ps1 alone.
+    echo.
+    pause
+    exit /b 1
+)
+
+rem Windows PowerShell 5.1 (powershell.exe), STA is required for the WPF window.
+powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File "%ROCK%"
+
+endlocal

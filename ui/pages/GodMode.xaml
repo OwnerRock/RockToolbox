@@ -1,0 +1,24 @@
+﻿      <!-- GOD MODE -->
+      <DockPanel x:Name="pnlGod" Visibility="Collapsed">
+        <WrapPanel DockPanel.Dock="Top">
+          <ComboBox x:Name="cmbGodCat" Width="230" Height="30" Margin="3" Foreground="Black" VerticalContentAlignment="Center"/>
+          <TextBox x:Name="txtGodQuery" Width="220" Height="30" Margin="3" VerticalContentAlignment="Center"
+                   Background="#14171B" Foreground="White" CaretBrush="White" BorderBrush="#35506A" ToolTip="Search by name or description"/>
+          <Button x:Name="btnGodOpen" Content="Open selected" Background="#2F6FB0" Padding="22,6"/>
+          <Button x:Name="btnGodFolder" Content="Open GodMode folder"/>
+          <Button x:Name="btnGodDesktop" Content="Create GodMode folder on Desktop"/>
+          <Button x:Name="btnGodRefresh" Content="Refresh"/>
+        </WrapPanel>
+        <TextBlock x:Name="txtGodInfo" DockPanel.Dock="Bottom" Foreground="#9AA0B8" Margin="8,6" TextWrapping="Wrap" Text=""/>
+        <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+          <ListView x:Name="lvGod" Background="#1B1F24" Foreground="#E6E8F2" BorderThickness="0" SelectionMode="Single">
+            <ListView.View>
+              <GridView>
+                <GridViewColumn Header="Setting" DisplayMemberBinding="{Binding Name}" Width="340"/>
+                <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}" Width="230"/>
+                <GridViewColumn Header="Description" DisplayMemberBinding="{Binding Description}" Width="520"/>
+              </GridView>
+            </ListView.View>
+          </ListView>
+        </Border>
+      </DockPanel>

@@ -1,1 +1,0 @@
-﻿$cmbDns.SelectedIndex = 0

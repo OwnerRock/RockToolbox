@@ -1,0 +1,98 @@
+﻿      <!-- SETTINGS -->
+      <ScrollViewer x:Name="pnlSettings" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+        <StackPanel MaxWidth="1100" Margin="20,10">
+          <TextBlock Text="Settings" FontSize="26" FontWeight="SemiBold" Foreground="White"/>
+          <TextBlock Text="Customize how Rock Toolbox looks and behaves. Changes apply instantly and are saved automatically." Foreground="#C9CDE0" Margin="0,4,0,18" TextWrapping="Wrap"/>
+
+          <Border Background="#23272D" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="6" Padding="20" Margin="0,0,0,12">
+            <StackPanel>
+              <TextBlock Text="Appearance" Style="{StaticResource H}" Margin="0,0,0,8"/>
+              <CheckBox x:Name="chkLight" Style="{StaticResource Switch}" Content="Light mode (turn off for dark mode)"/>
+
+              <TextBlock Text="Accent color" Foreground="#C9CDE0" Margin="4,16,0,6"/>
+              <WrapPanel x:Name="swatchPanel"/>
+              <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                <TextBlock Text="Custom color (#RRGGBB):" Foreground="#C9CDE0" VerticalAlignment="Center" Margin="4,0,8,0"/>
+                <TextBox x:Name="txtAccentHex" Width="110" Height="28" VerticalContentAlignment="Center" Background="#14171B" Foreground="White" CaretBrush="White" BorderBrush="#35506A"/>
+                <Button x:Name="btnAccentApply" Content="Apply" Padding="18,5"/>
+                <Button x:Name="btnAccentReset" Content="Default color" Padding="18,5"/>
+              </StackPanel>
+
+              <TextBlock Text="Text size" Foreground="#C9CDE0" Margin="4,16,0,6"/>
+              <ComboBox x:Name="cmbFontSize" Width="230" Height="30" HorizontalAlignment="Left" Margin="4,0,0,0" Foreground="Black" VerticalContentAlignment="Center"/>
+
+              <TextBlock Text="Interface scale" Foreground="#C9CDE0" Margin="4,16,0,6"/>
+              <ComboBox x:Name="cmbScale" Width="230" Height="30" HorizontalAlignment="Left" Margin="4,0,0,0" Foreground="Black" VerticalContentAlignment="Center"/>
+            </StackPanel>
+          </Border>
+
+          <Border Background="#23272D" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="6" Padding="20" Margin="0,0,0,12">
+            <StackPanel>
+              <TextBlock Text="Background" Style="{StaticResource H}" Margin="0,0,0,8"/>
+
+              <TextBlock Text="Background style (dark mode only)" Foreground="#C9CDE0" Margin="4,6,0,6"/>
+              <ComboBox x:Name="cmbBgStyle" Width="230" Height="30" HorizontalAlignment="Left" Margin="4,0,0,0" Foreground="Black" VerticalContentAlignment="Center"/>
+
+              <TextBlock Text="Custom background color (#RRGGBB)" Foreground="#C9CDE0" Margin="4,16,0,6"/>
+              <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="txtBgHex" Width="110" Height="28" Margin="4,0,0,0" VerticalContentAlignment="Center" Background="#14171B" Foreground="White" CaretBrush="White" BorderBrush="#35506A"/>
+                <Button x:Name="btnBgColorApply" Content="Apply" Padding="18,5"/>
+                <Button x:Name="btnBgColorClear" Content="Clear" Padding="18,5"/>
+              </StackPanel>
+
+              <TextBlock Text="Background image" Foreground="#C9CDE0" Margin="4,16,0,6"/>
+              <WrapPanel>
+                <Button x:Name="btnBgImgPick" Content="Choose image..." Background="#2F6FB0" Padding="18,5"/>
+                <Button x:Name="btnBgImgClear" Content="Remove image" Padding="18,5"/>
+                <Button x:Name="btnBgRestore" Content="Restore default" Padding="18,5"/>
+                <TextBlock x:Name="txtBgImgName" Foreground="#9AA0B8" VerticalAlignment="Center" Margin="8,0,0,0"/>
+              </WrapPanel>
+
+              <TextBlock Text="Image opacity" Foreground="#C9CDE0" Margin="4,16,0,6"/>
+              <StackPanel Orientation="Horizontal">
+                <Slider x:Name="sldBgOpacity" Style="{StaticResource RockSlider}" Minimum="0" Maximum="100" Value="40" Width="340" TickFrequency="5" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="0" VerticalAlignment="Center" Margin="4,0,0,0"/>
+                <TextBlock x:Name="txtBgOpacity" Text="40%" Foreground="#4FD1FF" FontFamily="Consolas" VerticalAlignment="Center" Margin="14,0,0,0" Width="50"/>
+              </StackPanel>
+
+              <TextBlock Text="Image blur" Foreground="#C9CDE0" Margin="4,16,0,6"/>
+              <StackPanel Orientation="Horizontal">
+                <Slider x:Name="sldBgBlur" Style="{StaticResource RockSlider}" Minimum="0" Maximum="40" Value="0" Width="340" TickFrequency="1" IsSnapToTickEnabled="True" IsMoveToPointEnabled="True" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="0" VerticalAlignment="Center" Margin="4,0,0,0"/>
+                <TextBlock x:Name="txtBgBlur" Text="0" Foreground="#4FD1FF" FontFamily="Consolas" VerticalAlignment="Center" Margin="14,0,0,0" Width="50"/>
+              </StackPanel>
+            </StackPanel>
+          </Border>
+
+          <Border Background="#23272D" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="6" Padding="20" Margin="0,0,0,12">
+            <StackPanel>
+              <TextBlock Text="Animations" Style="{StaticResource H}" Margin="0,0,0,8"/>
+
+              <TextBlock Text="Scroll animation" Foreground="#C9CDE0" Margin="4,6,0,6"/>
+              <ComboBox x:Name="cmbScrollAnim" Width="230" Height="30" HorizontalAlignment="Left" Margin="4,0,0,0" Foreground="Black" VerticalContentAlignment="Center"/>
+
+              <TextBlock Text="Scroll speed" Foreground="#C9CDE0" Margin="4,16,0,6"/>
+              <ComboBox x:Name="cmbScrollSpeed" Width="230" Height="30" HorizontalAlignment="Left" Margin="4,0,0,0" Foreground="Black" VerticalContentAlignment="Center"/>
+
+              <TextBlock Text="Page transition (when you switch tabs)" Foreground="#C9CDE0" Margin="4,16,0,6"/>
+              <ComboBox x:Name="cmbPageAnim" Width="230" Height="30" HorizontalAlignment="Left" Margin="4,0,0,10" Foreground="Black" VerticalContentAlignment="Center"/>
+
+              <CheckBox x:Name="chkCardAnim" Style="{StaticResource Switch}" Content="Animate app cards (hover, select, fade-in)"/>
+            </StackPanel>
+          </Border>
+
+          <Border Background="#23272D" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="6" Padding="20" Margin="0,0,0,12">
+            <StackPanel>
+              <TextBlock Text="Behavior" Style="{StaticResource H}" Margin="0,0,0,8"/>
+              <CheckBox x:Name="chkTopmost" Style="{StaticResource Switch}" Content="Keep Rock Toolbox always on top"/>
+              <CheckBox x:Name="chkMaxStart" Style="{StaticResource Switch}" Content="Start maximized"/>
+              <CheckBox x:Name="chkStatusBar" Style="{StaticResource Switch}" Content="Show the status / progress bar"/>
+              <CheckBox x:Name="chkHideConsole" Style="{StaticResource Switch}" Content="Hide the console window (log keeps running)"/>
+              <CheckBox x:Name="chkRemember" Style="{StaticResource Switch}" Content="Reopen the last tab I used"/>
+              <CheckBox x:Name="chkAutoRestore" Style="{StaticResource Switch}" Content="Auto restore point before risky actions" ToolTip="Creates a System Restore point before running tweaks, removing apps or drivers, and disabling Windows Update"/>
+              <CheckBox x:Name="chkTaskbar" Style="{StaticResource Switch}" Content="Add to taskbar (pin Rock Toolbox)"/>
+              <TextBlock Text="Open this tab on start" Foreground="#C9CDE0" Margin="4,14,0,6"/>
+              <ComboBox x:Name="cmbStartTab" Width="230" Height="30" HorizontalAlignment="Left" Margin="4,0,0,0" Foreground="Black" VerticalContentAlignment="Center"/>
+            </StackPanel>
+          </Border>
+
+        </StackPanel>
+      </ScrollViewer>

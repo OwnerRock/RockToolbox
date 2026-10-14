@@ -1,0 +1,83 @@
+﻿      <!-- UPDATES -->
+      <ScrollViewer x:Name="pnlUpdates" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+        <StackPanel MaxWidth="1180" Margin="20,10">
+          <TextBlock Text="Windows Update Profiles" FontSize="26" FontWeight="SemiBold" Foreground="White"/>
+          <TextBlock Text="Choose how Windows receives updates. Each profile replaces the Windows Update settings managed by Rock Toolbox." Foreground="#C9CDE0" Margin="0,4,0,18" TextWrapping="Wrap"/>
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#23272D" BorderBrush="#5CE08A" BorderThickness="2" CornerRadius="6" Margin="0,0,8,0" Padding="20" MinHeight="340">
+              <DockPanel>
+                <Button x:Name="btnUpdRec" DockPanel.Dock="Bottom" Content="Apply Recommended" Margin="0,14,0,0" Padding="12,8"/>
+                <StackPanel>
+                  <TextBlock Text="Recommended" FontSize="21" FontWeight="SemiBold" Foreground="White"/>
+                  <TextBlock Text="Balanced security and stability" Foreground="#C9CDE0" Margin="0,2,0,12"/>
+                  <TextBlock TextWrapping="Wrap" Foreground="#D5D9E6" LineHeight="23">
+                    <Run Text="- Defers feature updates for 365 days"/><LineBreak/>
+                    <Run Text="- Defers quality updates for 4 days"/><LineBreak/>
+                    <Run Text="- Excludes drivers from quality updates"/><LineBreak/>
+                    <Run Text="- Notifies when downloaded updates are ready to install"/>
+                  </TextBlock>
+                  <TextBlock Text="Deferral policies need Windows Pro, Enterprise or Education." FontStyle="Italic" Foreground="#9AA0B8" FontSize="11.5" Margin="0,12,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+              </DockPanel>
+            </Border>
+
+            <Border Grid.Column="1" Background="#23272D" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="6" Margin="4,0,4,0" Padding="20" MinHeight="340">
+              <DockPanel>
+                <Button x:Name="btnUpdDefault" DockPanel.Dock="Bottom" Content="Restore Defaults" Margin="0,14,0,0" Padding="12,8"/>
+                <StackPanel>
+                  <TextBlock Text="Windows Default" FontSize="21" FontWeight="SemiBold" Foreground="White"/>
+                  <TextBlock Text="Return control to Windows" Foreground="#C9CDE0" Margin="0,2,0,12"/>
+                  <TextBlock TextWrapping="Wrap" Foreground="#D5D9E6" LineHeight="23">
+                    <Run Text="- Removes Windows Update policies applied by Rock Toolbox"/><LineBreak/>
+                    <Run Text="- Restores update service startup settings"/><LineBreak/>
+                    <Run Text="- Re-enables update scheduled tasks"/>
+                  </TextBlock>
+                  <TextBlock Text="Use this to undo the Recommended or Disable profile." FontStyle="Italic" Foreground="#9AA0B8" FontSize="11.5" Margin="0,12,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+              </DockPanel>
+            </Border>
+
+            <Border Grid.Column="2" Background="#23272D" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="6" Margin="8,0,0,0" Padding="20" MinHeight="340">
+              <DockPanel>
+                <Button x:Name="btnUpdDisable" DockPanel.Dock="Bottom" Content="Disable Updates" Foreground="#FF5555" Margin="0,14,0,0" Padding="12,8"/>
+                <StackPanel>
+                  <TextBlock Text="Disable Updates" FontSize="21" FontWeight="SemiBold" Foreground="#FF4D4D"/>
+                  <TextBlock Text="Advanced use only" Foreground="#FF4D4D" Margin="0,2,0,12"/>
+                  <TextBlock TextWrapping="Wrap" Foreground="#D5D9E6" LineHeight="23">
+                    <Run Text="- Disables automatic update policy"/><LineBreak/>
+                    <Run Text="- Stops update services and scheduled tasks"/><LineBreak/>
+                    <Run Text="- Clears downloaded update files"/>
+                  </TextBlock>
+                  <TextBlock Text="Security updates will not be installed while this profile is active." FontStyle="Italic" Foreground="#FF4D4D" FontSize="11.5" Margin="0,12,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+              </DockPanel>
+            </Border>
+          </Grid>
+          <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4" Margin="0,14,0,0" Padding="14">
+            <TextBlock Text="Changes apply system-wide. Restart Windows after switching profiles. Use Restore Defaults to undo the update policies." Foreground="#D5D9E6" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+          </Border>
+          <WrapPanel Margin="0,10,0,0" HorizontalAlignment="Center">
+            <Button x:Name="btnDrvOff" Content="Block drivers via Windows Update"/>
+            <Button x:Name="btnDrvOn" Content="Allow drivers via Windows Update"/>
+            <Button x:Name="btnUpdOpen" Content="Open Windows Update"/>
+          </WrapPanel>
+          <Border Background="#23272D" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="6" Margin="0,14,0,0" Padding="20">
+            <StackPanel>
+              <TextBlock Text="Pause updates" FontSize="21" FontWeight="SemiBold" Foreground="White"/>
+              <TextBlock Text="Pause Windows updates for a while without turning anything off. They resume by themselves when the pause ends (this is the same pause the Settings app uses)." Foreground="#C9CDE0" Margin="0,4,0,10" TextWrapping="Wrap"/>
+              <WrapPanel>
+                <ComboBox x:Name="cmbPauseDays" Width="200" Height="30" Margin="3" Foreground="Black" VerticalContentAlignment="Center"/>
+                <Button x:Name="btnPause" Content="Pause updates" Padding="22,6"/>
+                <Button x:Name="btnResume" Content="Resume updates" Padding="22,6"/>
+                <TextBlock x:Name="txtPauseState" VerticalAlignment="Center" Foreground="#4FD1FF" FontFamily="Consolas" Margin="10,0"/>
+              </WrapPanel>
+            </StackPanel>
+          </Border>
+        </StackPanel>
+      </ScrollViewer>

@@ -1,0 +1,33 @@
+﻿      <!-- CONFIG -->
+      <Grid x:Name="pnlConfig" Visibility="Collapsed">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4" Margin="0,0,10,0">
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10">
+              <TextBlock Style="{StaticResource H}" Text="Features" Margin="4,4,4,6"/>
+              <StackPanel x:Name="featuresPanel"/>
+              <Button x:Name="btnFeatures" Content="Install Features" Margin="3,8,3,3"/>
+              <TextBlock Style="{StaticResource H}" Text="Fixes"/>
+              <StackPanel x:Name="fixesPanel"/>
+            </StackPanel>
+          </ScrollViewer>
+        </Border>
+        <Border Grid.Column="1" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10">
+              <TextBlock Style="{StaticResource H}" Text="Legacy Windows Panels" Margin="4,4,4,6"/>
+              <StackPanel x:Name="panelsPanel"/>
+              <TextBlock Style="{StaticResource H}" Text="Remote Access"/>
+              <Button x:Name="btnSsh" Content="OpenSSH Server - Enable"/>
+              <TextBlock Style="{StaticResource H}" Text="Mouse Cursor"/>
+              <Button x:Name="btnCurApply" Content="Windows 11 Dark Cursors - Apply"/>
+              <Button x:Name="btnCurReset" Content="Default Windows Cursors - Restore"/>
+              <TextBlock Style="{StaticResource H}" Text="Shortcut"/>
+              <Button x:Name="btnShortcut" Content="Rock Toolbox Shortcut (Rock icon) - Create"/>
+            </StackPanel>
+          </ScrollViewer>
+        </Border>
+      </Grid>

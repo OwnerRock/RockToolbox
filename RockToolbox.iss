@@ -1,8 +1,8 @@
-; Rock Toolbox - Inno Setup script
+; Rock Toolbox V2.0 - Inno Setup script
 ; Compile: "C:\Users\Rock\AppData\Local\Programs\Inno Setup 6\ISCC.exe" RockToolbox.iss
 
 #define MyAppName "Rock Toolbox"
-#define MyAppVersion "1.0"
+#define MyAppVersion "2.0"
 #define MyAppPublisher "Rock Tech"
 
 [Setup]
@@ -15,8 +15,8 @@ DisableProgramGroupPage=yes
 DisableWelcomePage=no
 PrivilegesRequired=lowest
 OutputDir=Output
-OutputBaseFilename=Setup-RockToolbox
-SetupIconFile=_build\RockInstaller.ico
+OutputBaseFilename=Setup-RockToolbox-V2.0
+SetupIconFile=_build\RockLogo.ico
 UninstallDisplayIcon={app}\RockLogo.ico
 Compression=lzma2
 SolidCompression=yes
@@ -33,9 +33,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "RockToolbox.ps1"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Start-RockToolbox.bat"; DestDir: "{app}"; Flags: ignoreversion
-Source: "RockT???.ps1"; Excludes: "RockToolbox.ps1,RockToolbox-Installer.ps1"; DestDir: "{app}"; Flags: ignoreversion
+Source: "src\*"; DestDir: "{app}\src"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "ui\*"; DestDir: "{app}\ui"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "_build\RockLogo.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "_build\RockInstaller.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{userdesktop}\{#MyAppName}"; Filename: "{sys}\WindowsPowerShell\v1.0\powershell.exe"; \

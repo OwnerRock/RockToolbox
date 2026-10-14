@@ -1,0 +1,93 @@
+﻿      <!-- DRIVERS -->
+      <DockPanel x:Name="pnlDrv" Visibility="Collapsed">
+        <WrapPanel DockPanel.Dock="Top">
+          <Button x:Name="btnDrvModeInstall" Content="Install drivers" Padding="22,6"/>
+          <Button x:Name="btnDrvModeUninstall" Content="Uninstall drivers" Padding="22,6"/>
+        </WrapPanel>
+        <Grid>
+          <StackPanel x:Name="pnlDrvWelcome" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="What do you want to do with your drivers?" FontSize="20" FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,18"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+              <Button x:Name="btnDrvPickInstall" Width="280" Height="170" Margin="10" Padding="16">
+                <StackPanel>
+                  <TextBlock Text="&#xE896;" FontFamily="Segoe MDL2 Assets" FontSize="44" Foreground="#4FD1FF" HorizontalAlignment="Center"/>
+                  <TextBlock Text="Install" FontSize="20" FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,4"/>
+                  <TextBlock Text="Find missing or newer drivers and choose which ones to install" TextWrapping="Wrap" TextAlignment="Center" Foreground="#C9CDE0"/>
+                </StackPanel>
+              </Button>
+              <Button x:Name="btnDrvPickUninstall" Width="280" Height="170" Margin="10" Padding="16">
+                <StackPanel>
+                  <TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="44" Foreground="#FF6B6B" HorizontalAlignment="Center"/>
+                  <TextBlock Text="Uninstall" FontSize="20" FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,4"/>
+                  <TextBlock Text="See the drivers installed on this PC and remove the ones you pick" TextWrapping="Wrap" TextAlignment="Center" Foreground="#C9CDE0"/>
+                </StackPanel>
+              </Button>
+            </StackPanel>
+          </StackPanel>
+
+          <DockPanel x:Name="pnlDrvInstall" Visibility="Collapsed">
+            <WrapPanel DockPanel.Dock="Top">
+              <Button x:Name="btnDrvScan" Content="Scan for drivers" Padding="22,6"/>
+              <Button x:Name="btnDrvSelAll" Content="Select all"/>
+              <Button x:Name="btnDrvSelNone" Content="Select none"/>
+              <Button x:Name="btnDrvInstall" Content="Install selected" Background="#2F6FB0" Padding="22,6"/>
+              <TextBlock x:Name="txtDrvCount" Text="Selected: 0 of 0" Foreground="#4FD1FF" FontFamily="Consolas" VerticalAlignment="Center" Margin="10,0"/>
+            </WrapPanel>
+            <TextBlock x:Name="txtDrvInfo" DockPanel.Dock="Bottom" Foreground="#9AA0B8" Margin="8,6" TextWrapping="Wrap"/>
+            <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+              <ListView x:Name="lvDrvInstall" Background="#1B1F24" Foreground="#E6E8F2" BorderThickness="0" SelectionMode="Single">
+                <ListView.View>
+                  <GridView>
+                    <GridViewColumn Width="46">
+                      <GridViewColumn.CellTemplate>
+                        <DataTemplate><CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0"/></DataTemplate>
+                      </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Driver" DisplayMemberBinding="{Binding Title}" Width="400"/>
+                    <GridViewColumn Header="Used for" DisplayMemberBinding="{Binding Kind}" Width="190"/>
+                    <GridViewColumn Header="Class" DisplayMemberBinding="{Binding DrvClass}" Width="110"/>
+                    <GridViewColumn Header="Provider" DisplayMemberBinding="{Binding Provider}" Width="190"/>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding DrvDate}" Width="100"/>
+                    <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}" Width="90"/>
+                  </GridView>
+                </ListView.View>
+              </ListView>
+            </Border>
+          </DockPanel>
+
+          <DockPanel x:Name="pnlDrvUninstall" Visibility="Collapsed">
+            <WrapPanel DockPanel.Dock="Top">
+              <Button x:Name="btnDrvUScan" Content="Refresh list" Padding="22,6"/>
+              <Button x:Name="btnDrvUSelNone" Content="Select none"/>
+              <Button x:Name="btnDrvUninstall" Content="Uninstall selected" Background="#B0343A" Padding="22,6"/>
+              <TextBlock x:Name="txtDrvUCount" Text="Selected: 0 of 0" Foreground="#4FD1FF" FontFamily="Consolas" VerticalAlignment="Center" Margin="10,0"/>
+            </WrapPanel>
+            <TextBlock x:Name="txtDrvUInfo" DockPanel.Dock="Bottom" Foreground="#9AA0B8" Margin="8,6" TextWrapping="Wrap"/>
+            <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+              <ListView x:Name="lvDrvUn" Background="#1B1F24" Foreground="#E6E8F2" BorderThickness="0" SelectionMode="Single">
+                <ListView.View>
+                  <GridView>
+                    <GridViewColumn Width="46">
+                      <GridViewColumn.CellTemplate>
+                        <DataTemplate><CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0"/></DataTemplate>
+                      </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Driver file" DisplayMemberBinding="{Binding Title}" Width="250"/>
+                    <GridViewColumn Header="Used for" DisplayMemberBinding="{Binding Kind}" Width="190"/>
+                    <GridViewColumn Header="Provider" DisplayMemberBinding="{Binding Provider}" Width="200"/>
+                    <GridViewColumn Header="Class" DisplayMemberBinding="{Binding DrvClass}" Width="110"/>
+                    <GridViewColumn Header="Version" DisplayMemberBinding="{Binding Version}" Width="140"/>
+                    <GridViewColumn Header="Date" DisplayMemberBinding="{Binding DrvDate}" Width="100"/>
+                    <GridViewColumn Header="INF" DisplayMemberBinding="{Binding Id}" Width="100"/>
+                    <GridViewColumn Header="File" Width="80">
+                      <GridViewColumn.CellTemplate>
+                        <DataTemplate><Button Content="Show" Tag="{Binding FilePath}" Margin="0" Padding="12,0" Height="22" HorizontalAlignment="Center" ToolTip="Open the folder of this driver and select the file"/></DataTemplate>
+                      </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                  </GridView>
+                </ListView.View>
+              </ListView>
+            </Border>
+          </DockPanel>
+        </Grid>
+      </DockPanel>

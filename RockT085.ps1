@@ -1,1 +1,0 @@
-﻿$script:wpSel       = $null

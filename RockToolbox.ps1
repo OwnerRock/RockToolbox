@@ -1,8 +1,16 @@
 ﻿<#
-    Rock Toolbox - Windows utility (Install | Tweaks | Debloat | Config | Updates | Wallpapers | Windows Update | Uninstall Apps | Drivers | God Mode | Settings)
+    Rock Toolbox - Windows utility (Install | Tweaks | Debloat | Config | Updates | Windows Update | Uninstall Apps | Drivers | System Info | Cleanup | Startup | Repair | Wallpapers | God Mode | Settings)
 
     Run with Start-RockToolbox.bat  (or: powershell -ExecutionPolicy Bypass -File .\RockToolbox.ps1)
     It re-launches itself as Administrator in Windows PowerShell 5.1.
+
+    Layout (keep these folders next to this file):
+      src\console   banner + console icon          ui\MainWindow.xaml   window shell
+      src\core      settings, window, helpers,     ui\Styles.xaml       all styles / templates
+                    navigation                     ui\pages\*.xaml      one file per tab
+      src\data      apps, tweaks, debloat, ...
+      src\pages     one file per tab (logic)
+      src\features  shortcut, cursors, taskbar, safety, profile, ...
 #>
 param([switch]$Relaunched)
 
@@ -21,6 +29,30 @@ trap {
 }
 
 # ------------------------------------------------------------------
+# Remote launch support:  irm https://raw.githubusercontent.com/OwnerRock/RockToolbox/main/RockToolbox.ps1 | iex
+# When run from memory there is no file path, so download the repo and run from disk.
+# ------------------------------------------------------------------
+if (-not $PSCommandPath) {
+    $ProgressPreference = 'SilentlyContinue'
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+    $root = Join-Path $env:LOCALAPPDATA 'RockToolbox\app'
+    $zip  = Join-Path $env:TEMP 'RockToolbox-main.zip'
+    $tmp  = Join-Path $env:TEMP 'RockToolbox-extract'
+    Write-Host 'Downloading Rock Toolbox...' -ForegroundColor Cyan
+    Invoke-WebRequest -UseBasicParsing -Uri 'https://github.com/OwnerRock/RockToolbox/archive/refs/heads/main.zip' -OutFile $zip
+    if (Test-Path $tmp) { Remove-Item $tmp -Recurse -Force }
+    Expand-Archive -LiteralPath $zip -DestinationPath $tmp -Force
+    if (Test-Path $root) { Remove-Item $root -Recurse -Force }
+    New-Item -ItemType Directory -Force -Path (Split-Path $root) | Out-Null
+    Move-Item -LiteralPath (Join-Path $tmp 'RockToolbox-main') -Destination $root
+    Remove-Item $zip, $tmp -Recurse -Force -ErrorAction SilentlyContinue
+    $main = Join-Path $root 'RockToolbox.ps1'
+    $args2 = "-NoProfile -ExecutionPolicy Bypass -STA -File `"$main`""
+    Start-Process powershell.exe -ArgumentList $args2 -Verb RunAs
+    return
+}
+
+# ------------------------------------------------------------------
 # Elevation (and force Windows PowerShell 5.1 so the Appx cmdlets work)
 # ------------------------------------------------------------------
 $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
@@ -33,113 +65,64 @@ if (-not $isAdmin -or $PSVersionTable.PSEdition -eq 'Core') {
 }
 
 
-# ------------------------------------------------------------------
-# Console banner
-# ------------------------------------------------------------------
-function Show-Banner {
-    $art = @'
- ____    ___    ____  _  __
-|  _ \  / _ \  / ___|| |/ /
-| |_) || | | || |    | ' / 
-|  _ < | |_| || |___ | . \ 
-|_| \_\ \___/  \____||_|\_\
-'@
-    $lines  = $art -split "`r?`n"
-    $colors = 'Cyan', 'Cyan', 'DarkCyan', 'Magenta', 'DarkMagenta'
-    Write-Host ''
-    for ($i = 0; $i -lt $lines.Count; $i++) {
-        Write-Host ('   ' + $lines[$i]) -ForegroundColor $colors[$i]
-    }
-    Write-Host ''
-    Write-Host '   ====== Rock Tech ======' -ForegroundColor White
-    Write-Host '   ===== Windows Toolbox =====' -ForegroundColor White
-    try { $os = (Get-CimInstance Win32_OperatingSystem).Caption } catch { $os = 'Windows' }
-    Write-Host ("   {0}  |  PowerShell {1}  |  Administrator" -f $os, $PSVersionTable.PSVersion) -ForegroundColor DarkGray
-    Write-Host ''
-}
-Show-Banner
-
-Add-Type -AssemblyName PresentationFramework, PresentationCore, WindowsBase
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-$ProgressPreference = 'SilentlyContinue'
-
-$AppDir = Join-Path $env:LOCALAPPDATA 'RockToolbox'
-$WpDir  = Join-Path $AppDir 'Wallpapers'
-New-Item -ItemType Directory -Force -Path $WpDir | Out-Null
-
-Add-Type -TypeDefinition @"
-using System;
-using System.Runtime.InteropServices;
-public class WinToolboxNative {
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
-    [DllImport("kernel32.dll")]
-    public static extern IntPtr GetConsoleWindow();
-    [DllImport("user32.dll")]
-    public static extern IntPtr SendMessage(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
-    [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
-    public static extern int SetCurrentProcessExplicitAppUserModelID(string AppID);
-    [DllImport("user32.dll")]
-    public static extern bool SetForegroundWindow(IntPtr hWnd);
-    [DllImport("user32.dll")]
-    public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-}
-"@
 
 # ------------------------------------------------------------------
-# Rock logo as a real icon: console window + taskbar (replaces the blue PowerShell icon)
+# Paths: the tool is split into modules (src\*) and UI files (ui\*) that sit next to this script
 # ------------------------------------------------------------------
-function New-RockBitmap {
-    param([int]$Size)
-    Add-Type -AssemblyName System.Drawing
-    $bmp = New-Object System.Drawing.Bitmap($Size, $Size, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
-    $g = [System.Drawing.Graphics]::FromImage($bmp)
-    $g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::AntiAlias
-    $k = $Size / 40.0
-    $facets = @(
-        @('#8FEBFF', 20, 2, 4, 12, 20, 20),
-        @('#4FD1FF', 20, 2, 36, 12, 20, 20),
-        @('#2F7BFF', 4, 12, 4, 28, 20, 20),
-        @('#7B5CFF', 36, 12, 36, 28, 20, 20),
-        @('#4B35C9', 4, 28, 20, 38, 20, 20),
-        @('#9A6BFF', 36, 28, 20, 38, 20, 20)
-    )
-    foreach ($f in $facets) {
-        $pts = [System.Drawing.PointF[]]@(
-            (New-Object System.Drawing.PointF([single]($f[1] * $k), [single]($f[2] * $k))),
-            (New-Object System.Drawing.PointF([single]($f[3] * $k), [single]($f[4] * $k))),
-            (New-Object System.Drawing.PointF([single]($f[5] * $k), [single]($f[6] * $k)))
-        )
-        $br = New-Object System.Drawing.SolidBrush([System.Drawing.ColorTranslator]::FromHtml($f[0]))
-        $g.FillPolygon($br, $pts)
-        $br.Dispose()
-    }
-    $g.Dispose()
-    return $bmp
-}
-function New-RockHIcon {
-    param([int]$Size)
-    $bmp = New-RockBitmap $Size
-    return $bmp.GetHicon()
-}
+$script:RockMain = $PSCommandPath
+$script:RockRoot = Split-Path -Parent $PSCommandPath
+
+# console banner + icon (runs before the UI, exactly like the single-file version did)
+. (Join-Path $script:RockRoot 'src\console\Console.ps1')
+
+# every module is dot-sourced in this order into the same script scope (order matters: later files use earlier ones)
+$__rockMods = @(
+        'src\core\Settings.ps1',
+        'src\core\Language.ps1',
+        'src\core\Window.ps1',
+        'src\core\Helpers.ps1',
+        'src\data\Apps.ps1',
+        'src\data\Tweaks.ps1',
+        'src\data\Debloat.ps1',
+        'src\data\Customize.ps1',
+        'src\data\Config.ps1',
+        'src\pages\Install.ps1',
+        'src\pages\Tweaks.ps1',
+        'src\data\CursorPack.ps1',
+        'src\features\Cursors.ps1',
+        'src\features\RockShortcut.ps1',
+        'src\pages\Config.ps1',
+        'src\pages\Updates.ps1',
+        'src\pages\Debloat.ps1',
+        'src\pages\Wallpapers.ps1',
+        'src\pages\WingetIdUpgrade.ps1',
+        'src\pages\GodMode.ps1',
+        'src\pages\WindowsUpdate.ps1',
+        'src\pages\UninstallApps.ps1',
+        'src\pages\Drivers.ps1',
+        'src\pages\Settings.ps1',
+        'src\features\TaskbarPin.ps1',
+        'src\features\SmoothScroll.ps1',
+        'src\features\Background.ps1',
+        'src\features\Common.ps1',
+        'src\features\Safety.ps1',
+        'src\features\StopAndLiveTool.ps1',
+        'src\features\Profile.ps1',
+        'src\pages\SystemInfo.ps1',
+        'src\pages\SystemInfoLive.ps1',
+        'src\pages\Cleanup.ps1',
+        'src\pages\Startup.ps1',
+        'src\pages\Repair.ps1',
+        'src\features\PauseUpdates.ps1',
+        'src\core\Navigation.ps1'
+)
+
 try {
-    [void][WinToolboxNative]::SetCurrentProcessExplicitAppUserModelID('Rock.Toolbox.Utility')
-    $Host.UI.RawUI.WindowTitle = 'Rock Toolbox'
-    $hwnd = [WinToolboxNative]::GetConsoleWindow()
-    if ($hwnd -ne [IntPtr]::Zero) {
-        $hBig   = New-RockHIcon 64
-        $hSmall = New-RockHIcon 32
-        [void][WinToolboxNative]::SendMessage($hwnd, 0x80, [IntPtr]1, $hBig)
-        [void][WinToolboxNative]::SendMessage($hwnd, 0x80, [IntPtr]0, $hSmall)
+    foreach ($__rockMod in $__rockMods) {
+        $__rockPath = Join-Path $script:RockRoot $__rockMod
+        if (-not (Test-Path -LiteralPath $__rockPath)) { throw "Missing file: $__rockMod (keep the src and ui folders next to RockToolbox.ps1)" }
+        . $__rockPath
     }
-} catch { }
-
-
-$env:ROCK_TOOLBOX_MASTER = $PSCommandPath
-try {
-    $partFiles = @(Get-ChildItem -LiteralPath $PSScriptRoot -File | Where-Object { $_.Name -match '^RockT[0-9]{3}\.ps1$' } | Sort-Object Name)
-    if ($partFiles.Count -ne 250) { throw ('Expected 250 RockT001..RockT250 .ps1 files next to RockToolbox.ps1, found ' + $partFiles.Count + '.') }
-    foreach ($pf in $partFiles) { . $pf.FullName }
 }
 catch {
     Write-Host $_.Exception.Message -ForegroundColor Red

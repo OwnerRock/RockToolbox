@@ -1,1 +1,0 @@
-﻿$script:wpPage      = 1

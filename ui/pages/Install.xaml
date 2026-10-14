@@ -1,0 +1,44 @@
+﻿      <!-- INSTALL -->
+      <Grid x:Name="pnlInstall">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="240"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4" Margin="0,0,10,0" Padding="8">
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+              <TextBlock Style="{StaticResource SideH}" Text="Actions" Margin="3,2,3,4"/>
+              <Button x:Name="btnInstall" Style="{StaticResource SideBtn}" Content="Install / Upgrade Apps" Background="#2F6FB0"/>
+              <Button x:Name="btnUninstall" Style="{StaticResource SideBtn}" Content="Uninstall Applications"/>
+              <Button x:Name="btnUpgrade" Style="{StaticResource SideBtn}" Content="Upgrade All Applications"/>
+              <Button x:Name="btnStopAction" Style="{StaticResource SideBtn}" Content="Stop Action" Background="#B0343A" Foreground="#FFEEEE"/>
+              <TextBlock Style="{StaticResource SideH}" Text="Package Manager" Margin="3,8,3,3"/>
+              <RadioButton x:Name="rdPkgWinget" Content="WinGet" GroupName="pkgMgr" FontSize="12" Margin="6,1" Foreground="#E6E8F2" IsChecked="True"/>
+              <RadioButton x:Name="rdPkgChoco" Content="Chocolatey" GroupName="pkgMgr" FontSize="12" Margin="6,1" Foreground="#E6E8F2"/>
+              <TextBlock Style="{StaticResource SideH}" Text="Selection" Margin="3,8,3,3"/>
+              <Button x:Name="btnAppsClear" Style="{StaticResource SideBtn}" Content="Clear Selection"/>
+              <Button x:Name="btnCollapse" Style="{StaticResource SideBtn}" Content="Collapse All Categories"/>
+              <Button x:Name="btnExpand" Style="{StaticResource SideBtn}" Content="Expand All Categories"/>
+              <Border Background="#1E3547" BorderBrush="#35506A" BorderThickness="1" CornerRadius="3" Margin="3,1" Padding="12,4">
+                <TextBlock x:Name="txtSelCount" Text="Selected Apps: 0" FontSize="12" Foreground="#F0F4FF" HorizontalAlignment="Center"/>
+              </Border>
+              <Button x:Name="btnShowInstalled" Style="{StaticResource SideBtn}" Content="Show Installed Apps"/>
+              <TextBlock x:Name="lblCustomHdr" Style="{StaticResource SideH}" Text="Custom winget ID" Margin="3,8,3,3"/>
+              <TextBox x:Name="txtCustomId" Height="24" FontSize="12" Margin="3,1" VerticalContentAlignment="Center" Background="#14171B" Foreground="White" CaretBrush="White" BorderBrush="#35506A"/>
+              <Button x:Name="btnInstallCustom" Style="{StaticResource SideBtn}" Content="Install ID"/>
+            </StackPanel>
+          </ScrollViewer>
+        </Border>
+        <DockPanel Grid.Column="1">
+          <DockPanel DockPanel.Dock="Top" Margin="0,0,0,8">
+            <TextBox x:Name="txtAppSearch" DockPanel.Dock="Right" Width="240" Height="30" Margin="8,0,0,0" VerticalContentAlignment="Center"
+                     Background="#14171B" Foreground="White" CaretBrush="White" BorderBrush="#35506A" ToolTip="Search apps"/>
+            <WrapPanel x:Name="chipPanel"/>
+          </DockPanel>
+          <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <StackPanel x:Name="appsPanel" Margin="8"/>
+            </ScrollViewer>
+          </Border>
+        </DockPanel>
+      </Grid>

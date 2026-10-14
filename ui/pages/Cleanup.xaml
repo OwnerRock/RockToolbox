@@ -1,0 +1,29 @@
+﻿      <!-- CLEANUP -->
+      <DockPanel x:Name="pnlClean" Visibility="Collapsed">
+        <WrapPanel DockPanel.Dock="Top">
+          <Button x:Name="btnCleanRun" Content="Clean selected" Background="#B0343A" Padding="22,6"/>
+          <Button x:Name="btnCleanScan" Content="Rescan sizes" Padding="22,6"/>
+          <Button x:Name="btnCleanRec" Content="Select recommended" Padding="22,6"/>
+          <Button x:Name="btnCleanAll" Content="Select all" Padding="22,6"/>
+          <Button x:Name="btnCleanNone" Content="Select none" Padding="22,6"/>
+          <TextBlock x:Name="txtCleanCount" Text="Selected: 0 B" Foreground="#4FD1FF" FontFamily="Consolas" VerticalAlignment="Center" Margin="10,0"/>
+        </WrapPanel>
+        <TextBlock x:Name="txtCleanInfo" DockPanel.Dock="Bottom" Foreground="#9AA0B8" Margin="8,6" TextWrapping="Wrap"
+                   Text="Files that are in use are skipped. Close your browsers first for a bigger result. Nothing outside these locations is touched."/>
+        <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+          <ListView x:Name="lvClean" Background="#1B1F24" Foreground="#E6E8F2" BorderThickness="0" SelectionMode="Single">
+            <ListView.View>
+              <GridView>
+                <GridViewColumn Width="46">
+                  <GridViewColumn.CellTemplate>
+                    <DataTemplate><CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0"/></DataTemplate>
+                  </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="What" DisplayMemberBinding="{Binding Name}" Width="290"/>
+                <GridViewColumn Header="Size" DisplayMemberBinding="{Binding Size}" Width="110"/>
+                <GridViewColumn Header="Details" DisplayMemberBinding="{Binding Desc}" Width="640"/>
+              </GridView>
+            </ListView.View>
+          </ListView>
+        </Border>
+      </DockPanel>

@@ -1,0 +1,31 @@
+﻿      <!-- WALLPAPERS -->
+      <DockPanel x:Name="pnlWall" Visibility="Collapsed">
+        <WrapPanel DockPanel.Dock="Top">
+          <TextBox x:Name="txtWpQuery" Width="400" Height="34" Margin="3" FontSize="14" Padding="8,0" VerticalContentAlignment="Center"
+                   Background="#14171B" Foreground="White" CaretBrush="White" BorderBrush="#35506A"
+                   ToolTip="Type what you want to see: mountains at night, cyberpunk city, red sports car..."/>
+          <Button x:Name="btnWpSearch" Content="Search" Background="#2F6FB0" Padding="28,7"/>
+          <Button x:Name="btnWpSimilar" Content="Find similar" Padding="18,7" ToolTip="Click a picture first, then press this to see more like it"/>
+          <Button x:Name="btnWpMore" Content="More results" Padding="18,7"/>
+        </WrapPanel>
+        <WrapPanel x:Name="wpChips" DockPanel.Dock="Top" Margin="0,0,0,4"/>
+        <WrapPanel DockPanel.Dock="Top">
+          <ComboBox x:Name="cmbWpStyle" Width="110" Height="30" Margin="3" Foreground="Black" VerticalContentAlignment="Center"/>
+          <Button x:Name="btnWpSet" Content="Set as wallpaper"/>
+          <Button x:Name="btnWpLock" Content="Set as lock screen"/>
+          <Button x:Name="btnWpBoth" Content="Set both" Background="#2F6FB0"/>
+          <Button x:Name="btnWpRandom" Content="Random from list"/>
+          <Button x:Name="btnWpSave" Content="Save to Pictures"/>
+          <Button x:Name="btnWpLocal" Content="Desktop from local image..."/>
+          <Button x:Name="btnWpLockLocal" Content="Lock screen from local image..."/>
+          <Button x:Name="btnWpDailyOn" Content="Enable daily Bing wallpaper"/>
+          <Button x:Name="btnWpDailyOff" Content="Disable daily"/>
+        </WrapPanel>
+        <TextBlock x:Name="txtWpInfo" DockPanel.Dock="Bottom" Foreground="#9AA0B8" Margin="8,6" TextWrapping="Wrap"
+                   Text="Type a word and press Search. Click a picture to select it, double-click to apply it, or press Find similar to see more like it."/>
+        <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+          <ScrollViewer x:Name="wpScroll" VerticalScrollBarVisibility="Auto">
+            <Grid x:Name="wpPanel" Margin="6"/>
+          </ScrollViewer>
+        </Border>
+      </DockPanel>

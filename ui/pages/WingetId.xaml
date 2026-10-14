@@ -1,0 +1,23 @@
+﻿      <!-- WINGET ID LIST -->
+      <DockPanel x:Name="pnlFind" Visibility="Collapsed">
+        <WrapPanel DockPanel.Dock="Top">
+          <ComboBox x:Name="cmbFindSource" Width="190" Height="30" Margin="3" Foreground="Black" VerticalContentAlignment="Center"/>
+          <TextBox x:Name="txtFindQuery" Width="220" Height="30" Margin="3" VerticalContentAlignment="Center"
+                   Background="#14171B" Foreground="White" CaretBrush="White" BorderBrush="#35506A" ToolTip="Optional: narrow the list by name"/>
+          <Button x:Name="btnFindCopy" Content="Copy ID" Background="#2F6FB0" Padding="22,6"/>
+          <Button x:Name="btnFindSend" Content="Use in Install tab"/>
+          <Button x:Name="btnFindInstall" Content="Install selected"/>
+        </WrapPanel>
+        <TextBlock x:Name="txtFindInfo" DockPanel.Dock="Bottom" Foreground="#9AA0B8" Margin="8,6" TextWrapping="Wrap" Text=""/>
+        <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+          <ListView x:Name="lvFind" Background="#1B1F24" Foreground="#E6E8F2" BorderThickness="0" SelectionMode="Single">
+            <ListView.View>
+              <GridView>
+                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="330"/>
+                <GridViewColumn Header="Id (winget)" DisplayMemberBinding="{Binding Id}" Width="380"/>
+                <GridViewColumn Header="Category" DisplayMemberBinding="{Binding Category}" Width="180"/>
+              </GridView>
+            </ListView.View>
+          </ListView>
+        </Border>
+      </DockPanel>

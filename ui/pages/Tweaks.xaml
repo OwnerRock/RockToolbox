@@ -1,0 +1,38 @@
+﻿      <!-- TWEAKS -->
+      <Grid x:Name="pnlTweaks" Visibility="Collapsed">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="470"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4" Margin="0,0,10,0">
+          <DockPanel>
+            <WrapPanel DockPanel.Dock="Bottom" Margin="6">
+              <Button x:Name="btnTweakApply" Content="Run Tweaks" Background="#2F6FB0" Padding="22,7"/>
+              <Button x:Name="btnTweakUndo" Content="Undo Selected Tweaks" Padding="22,7"/>
+              <Button x:Name="btnTweakRec" Content="Select Recommended" Padding="22,7"/>
+              <Button x:Name="btnTweakClear" Content="Clear" Padding="22,7"/>
+            </WrapPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+              <StackPanel x:Name="tweaksPanel" Margin="6"/>
+            </ScrollViewer>
+          </DockPanel>
+        </Border>
+        <Border Grid.Column="1" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10">
+              <TextBlock Style="{StaticResource H}" Text="Customize Preferences" Margin="4,4,4,6"/>
+              <StackPanel x:Name="customizePanel"/>
+              <TextBlock Style="{StaticResource H}" Text="Performance Plans - NOT FOR LAPTOPS"/>
+              <Button x:Name="btnUltOff" Content="Ultimate Performance Profile - Disable"/>
+              <Button x:Name="btnUltOn" Content="Ultimate Performance Profile - Enable"/>
+              <TextBlock Style="{StaticResource H}" Text="DNS"/>
+              <WrapPanel>
+                <ComboBox x:Name="cmbDns" Width="240" Height="30" Margin="3" Foreground="Black" VerticalContentAlignment="Center"/>
+                <Button x:Name="btnDns" Content="Set DNS"/>
+              </WrapPanel>
+              <TextBlock Style="{StaticResource H}" Text="Explorer"/>
+              <Button x:Name="btnExplorer" Content="Restart Explorer (apply toggles now)"/>
+            </StackPanel>
+          </ScrollViewer>
+        </Border>
+      </Grid>

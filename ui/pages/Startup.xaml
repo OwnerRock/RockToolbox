@@ -1,0 +1,37 @@
+﻿      <!-- STARTUP MANAGER -->
+      <DockPanel x:Name="pnlStartup" Visibility="Collapsed">
+        <WrapPanel DockPanel.Dock="Top">
+          <Button x:Name="btnStRefresh" Content="Refresh list" Padding="22,6"/>
+          <Button x:Name="btnStDisable" Content="Disable selected" Background="#B0343A" Padding="22,6"/>
+          <Button x:Name="btnStEnable" Content="Enable selected" Padding="22,6"/>
+          <Button x:Name="btnStNone" Content="Select none" Padding="22,6"/>
+          <Button x:Name="btnStOpen" Content="Open location" Padding="22,6" ToolTip="Select a row first"/>
+          <TextBlock x:Name="txtStCount" Text="Selected: 0 of 0" Foreground="#4FD1FF" FontFamily="Consolas" VerticalAlignment="Center" Margin="10,0"/>
+        </WrapPanel>
+        <DockPanel DockPanel.Dock="Top" Margin="0,2,0,6">
+          <TextBox x:Name="txtStSearch" DockPanel.Dock="Right" Width="240" Height="30" Margin="8,0,0,0" VerticalContentAlignment="Center"
+                   Background="#14171B" Foreground="White" CaretBrush="White" BorderBrush="#35506A" ToolTip="Search by name or command"/>
+          <ComboBox x:Name="cmbStKind" DockPanel.Dock="Left" Width="200" Height="30" Margin="3,0,0,0" Foreground="Black" VerticalContentAlignment="Center"/>
+          <TextBlock/>
+        </DockPanel>
+        <TextBlock x:Name="txtStInfo" DockPanel.Dock="Bottom" Foreground="#9AA0B8" Margin="8,6" TextWrapping="Wrap"
+                   Text="Programs and registry/folder entries use the same switch as Task Manager. Scheduled tasks and services are enabled or disabled directly. Changes take effect at the next sign-in or restart."/>
+        <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+          <ListView x:Name="lvStartup" Background="#1B1F24" Foreground="#E6E8F2" BorderThickness="0" SelectionMode="Single">
+            <ListView.View>
+              <GridView>
+                <GridViewColumn Width="46">
+                  <GridViewColumn.CellTemplate>
+                    <DataTemplate><CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0"/></DataTemplate>
+                  </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}" Width="90"/>
+                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="240"/>
+                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Kind}" Width="120"/>
+                <GridViewColumn Header="Command" DisplayMemberBinding="{Binding Command}" Width="520"/>
+                <GridViewColumn Header="Where" DisplayMemberBinding="{Binding Source}" Width="190"/>
+              </GridView>
+            </ListView.View>
+          </ListView>
+        </Border>
+      </DockPanel>
