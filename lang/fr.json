@@ -338,6 +338,8 @@
  "Enter at least one link that starts with http:// or https://": "Saisissez au moins un lien commençant par http:// ou https://",
  "Choose a folder to save the files in.": "Choisissez un dossier où enregistrer les fichiers.",
  "Rock Toolbox user": "Utilisateur de Rock Toolbox",
+ "Classic look (old interface)": "Look classique (ancienne interface)",
+ "Restarts the app to switch between the new and the classic look.": "Redémarre l’app pour passer du nouveau look au look classique, et inversement.",
  "Waiting": "En attente",
  "Downloading...": "Téléchargement...",
  "Installing...": "Installation...",

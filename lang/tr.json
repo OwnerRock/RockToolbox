@@ -338,6 +338,8 @@
  "Enter at least one link that starts with http:// or https://": "http:// veya https:// ile başlayan en az bir bağlantı girin",
  "Choose a folder to save the files in.": "Dosyaların kaydedileceği bir klasör seçin.",
  "Rock Toolbox user": "Rock Toolbox kullanıcısı",
+ "Classic look (old interface)": "Klasik görünüm (eski arayüz)",
+ "Restarts the app to switch between the new and the classic look.": "Yeni ve klasik görünüm arasında geçiş yapmak için uygulamayı yeniden başlatır.",
  "Waiting": "Bekliyor",
  "Downloading...": "İndiriliyor...",
  "Installing...": "Yükleniyor...",
