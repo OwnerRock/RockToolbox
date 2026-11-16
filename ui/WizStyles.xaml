@@ -1,0 +1,171 @@
+    <!-- shared styles of the welcome screen, the profile window and the About window -->
+    <Style x:Key="TitleClose" TargetType="Button">
+      <Setter Property="Width" Value="44"/><Setter Property="Background" Value="Transparent"/><Setter Property="Foreground" Value="#C9CDE0"/>
+      <Setter Property="Focusable" Value="False"/><Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+        <Border x:Name="bd" Background="{TemplateBinding Background}"><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+        <ControlTemplate.Triggers>
+          <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="bd" Property="Background" Value="#E5484D"/><Setter Property="Foreground" Value="#FFFFFF"/></Trigger>
+          <Trigger Property="IsPressed" Value="True"><Setter TargetName="bd" Property="Background" Value="#C23B40"/></Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+    </Style>
+
+    <!-- big gradient pill button: grows on hover, squeezes and springs back when pressed -->
+    <Style x:Key="WizBtn" TargetType="Button">
+      <Setter Property="Foreground" Value="#FFFFFF"/><Setter Property="Cursor" Value="Hand"/><Setter Property="FontSize" Value="16"/>
+      <Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Focusable" Value="False"/><Setter Property="Padding" Value="58,14"/>
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+        <Border x:Name="bd" CornerRadius="26" Padding="{TemplateBinding Padding}" RenderTransformOrigin="0.5,0.5">
+          <Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#FF9F0A" Offset="0"/><GradientStop Color="#FF375F" Offset="0.55"/><GradientStop Color="#BF5AF2" Offset="1"/></LinearGradientBrush></Border.Background>
+          <Border.RenderTransform><ScaleTransform x:Name="sc" ScaleX="1" ScaleY="1"/></Border.RenderTransform>
+          <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <ControlTemplate.Triggers>
+          <Trigger Property="IsMouseOver" Value="True">
+            <Trigger.EnterActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleX" To="1.05" Duration="0:0:0.16"/>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleY" To="1.05" Duration="0:0:0.16"/>
+            </Storyboard></BeginStoryboard></Trigger.EnterActions>
+            <Trigger.ExitActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2"/>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2"/>
+            </Storyboard></BeginStoryboard></Trigger.ExitActions>
+          </Trigger>
+          <Trigger Property="IsPressed" Value="True">
+            <Trigger.EnterActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleX" To="0.93" Duration="0:0:0.08"/>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleY" To="0.93" Duration="0:0:0.08"/>
+            </Storyboard></BeginStoryboard></Trigger.EnterActions>
+            <Trigger.ExitActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleX" To="1.05" Duration="0:0:0.18"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.8"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleY" To="1.05" Duration="0:0:0.18"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.8"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            </Storyboard></BeginStoryboard></Trigger.ExitActions>
+          </Trigger>
+          <Trigger Property="IsEnabled" Value="False"><Setter TargetName="bd" Property="Opacity" Value="0.45"/></Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+    </Style>
+
+    <!-- language icon (iPhone home-screen style): grows on hover, springs when pressed -->
+    <Style x:Key="WizIcon" TargetType="Button">
+      <Setter Property="Cursor" Value="Hand"/><Setter Property="Focusable" Value="False"/><Setter Property="Margin" Value="2,6"/>
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+        <Border x:Name="bd" Background="Transparent" RenderTransformOrigin="0.5,0.5">
+          <Border.RenderTransform><ScaleTransform x:Name="sc" ScaleX="1" ScaleY="1"/></Border.RenderTransform>
+          <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <ControlTemplate.Triggers>
+          <Trigger Property="IsMouseOver" Value="True">
+            <Trigger.EnterActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.16"/>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.16"/>
+            </Storyboard></BeginStoryboard></Trigger.EnterActions>
+            <Trigger.ExitActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2"/>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2"/>
+            </Storyboard></BeginStoryboard></Trigger.ExitActions>
+          </Trigger>
+          <Trigger Property="IsPressed" Value="True">
+            <Trigger.EnterActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleX" To="0.9" Duration="0:0:0.08"/>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleY" To="0.9" Duration="0:0:0.08"/>
+            </Storyboard></BeginStoryboard></Trigger.EnterActions>
+            <Trigger.ExitActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleX" To="1.1" Duration="0:0:0.2"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.9"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleY" To="1.1" Duration="0:0:0.2"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.9"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            </Storyboard></BeginStoryboard></Trigger.ExitActions>
+          </Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+    </Style>
+
+    <Style x:Key="WizText" TargetType="TextBox">
+      <Setter Property="Background" Value="#14171B"/><Setter Property="Foreground" Value="#F2F4FF"/><Setter Property="CaretBrush" Value="#FF375F"/>
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TextBox">
+        <Border x:Name="bd" Background="{TemplateBinding Background}" BorderBrush="#2B3038" BorderThickness="1.5" CornerRadius="14" Padding="10,0">
+          <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center"/>
+        </Border>
+        <ControlTemplate.Triggers>
+          <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="bd" Property="BorderBrush" Value="#FF375F"/></Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+    </Style>
+
+    <!-- "pick your look" card: lifts on hover, gets an accent frame + check when selected -->
+    <Style x:Key="WizCard" TargetType="Button">
+      <Setter Property="Cursor" Value="Hand"/><Setter Property="Focusable" Value="False"/><Setter Property="Margin" Value="8,0"/>
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+        <Grid x:Name="root" RenderTransformOrigin="0.5,0.5">
+          <Grid.RenderTransform><TransformGroup><ScaleTransform x:Name="sc" ScaleX="1" ScaleY="1"/><TranslateTransform x:Name="tt" Y="0"/></TransformGroup></Grid.RenderTransform>
+          <Border x:Name="bd" CornerRadius="18" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="2" Padding="10">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+          <Border x:Name="frame" CornerRadius="18" BorderThickness="2.5" Opacity="0" IsHitTestVisible="False">
+            <Border.BorderBrush><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#FF9F0A" Offset="0"/><GradientStop Color="#FF375F" Offset="0.55"/><GradientStop Color="#BF5AF2" Offset="1"/></LinearGradientBrush></Border.BorderBrush>
+          </Border>
+          <Border x:Name="ck" Width="26" Height="26" CornerRadius="13" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-8,-8,0" Opacity="0" RenderTransformOrigin="0.5,0.5" IsHitTestVisible="False">
+            <Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#FF9F0A" Offset="0"/><GradientStop Color="#FF375F" Offset="0.55"/><GradientStop Color="#BF5AF2" Offset="1"/></LinearGradientBrush></Border.Background>
+            <Border.RenderTransform><ScaleTransform x:Name="cks" ScaleX="0.4" ScaleY="0.4"/></Border.RenderTransform>
+            <TextBlock Text="&#x2713;" FontSize="15" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+        </Grid>
+        <ControlTemplate.Triggers>
+          <Trigger Property="IsMouseOver" Value="True">
+            <Trigger.EnterActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="tt" Storyboard.TargetProperty="Y" To="-4" Duration="0:0:0.18"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            </Storyboard></BeginStoryboard></Trigger.EnterActions>
+            <Trigger.ExitActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="tt" Storyboard.TargetProperty="Y" To="0" Duration="0:0:0.22"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            </Storyboard></BeginStoryboard></Trigger.ExitActions>
+          </Trigger>
+          <Trigger Property="IsPressed" Value="True">
+            <Trigger.EnterActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleX" To="0.96" Duration="0:0:0.08"/>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleY" To="0.96" Duration="0:0:0.08"/>
+            </Storyboard></BeginStoryboard></Trigger.EnterActions>
+            <Trigger.ExitActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.8"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+              <DoubleAnimation Storyboard.TargetName="sc" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.8"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            </Storyboard></BeginStoryboard></Trigger.ExitActions>
+          </Trigger>
+          <Trigger Property="Selector.IsSelected" Value="True">
+            <Trigger.EnterActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="frame" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2"/>
+              <DoubleAnimation Storyboard.TargetName="ck" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.15"/>
+              <DoubleAnimation Storyboard.TargetName="cks" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.32"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.9"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+              <DoubleAnimation Storyboard.TargetName="cks" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.32"><DoubleAnimation.EasingFunction><BackEase EasingMode="EaseOut" Amplitude="0.9"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+            </Storyboard></BeginStoryboard></Trigger.EnterActions>
+            <Trigger.ExitActions><BeginStoryboard><Storyboard>
+              <DoubleAnimation Storyboard.TargetName="frame" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2"/>
+              <DoubleAnimation Storyboard.TargetName="ck" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.15"/>
+              <DoubleAnimation Storyboard.TargetName="cks" Storyboard.TargetProperty="ScaleX" To="0.4" Duration="0:0:0.15"/>
+              <DoubleAnimation Storyboard.TargetName="cks" Storyboard.TargetProperty="ScaleY" To="0.4" Duration="0:0:0.15"/>
+            </Storyboard></BeginStoryboard></Trigger.ExitActions>
+          </Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+    </Style>
+
+    <!-- small pill (light / dark) -->
+    <Style x:Key="WizChip" TargetType="Button">
+      <Setter Property="Cursor" Value="Hand"/><Setter Property="Focusable" Value="False"/><Setter Property="Foreground" Value="#9AA0B8"/>
+      <Setter Property="FontSize" Value="13"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Margin" Value="4,0"/>
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
+        <Grid>
+          <Border x:Name="bd" CornerRadius="18" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1.5"/>
+          <Border x:Name="on" CornerRadius="18" Opacity="0">
+            <Border.Background><LinearGradientBrush StartPoint="0,0" EndPoint="1,1"><GradientStop Color="#FF9F0A" Offset="0"/><GradientStop Color="#FF375F" Offset="0.55"/><GradientStop Color="#BF5AF2" Offset="1"/></LinearGradientBrush></Border.Background>
+          </Border>
+          <ContentPresenter x:Name="cp" Margin="22,8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+          <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="bd" Property="BorderBrush" Value="#FF375F"/></Trigger>
+          <Trigger Property="Selector.IsSelected" Value="True">
+            <Setter TargetName="cp" Property="TextElement.Foreground" Value="#FFFFFF"/>
+            <Trigger.EnterActions><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="on" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2"/></Storyboard></BeginStoryboard></Trigger.EnterActions>
+            <Trigger.ExitActions><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="on" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2"/></Storyboard></BeginStoryboard></Trigger.ExitActions>
+          </Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+    </Style>

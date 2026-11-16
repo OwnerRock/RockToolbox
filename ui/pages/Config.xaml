@@ -1,0 +1,69 @@
+﻿      <!-- CONFIG -->
+      <Grid x:Name="pnlConfig" Visibility="Collapsed">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,10,0">
+          <StackPanel>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource CardH}" Text="Features"/>
+                <StackPanel x:Name="featuresPanel" Margin="0,0,0,8"/>
+                <Button x:Name="btnFeatures" Style="{StaticResource ActPrimary}"><DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE896;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Install Features" VerticalAlignment="Center" TextWrapping="Wrap"/></DockPanel></Button>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource CardH}" Text="Fixes"/>
+                <StackPanel x:Name="fixesPanel"/>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+          <StackPanel>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource CardH}" Text="Legacy Windows Panels"/>
+                <StackPanel x:Name="panelsPanel"/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource CardH}" Text="Remote Access"/>
+                <Button x:Name="btnSsh" Style="{StaticResource ActRow}"><DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE839;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="OpenSSH Server - Enable" VerticalAlignment="Center" TextWrapping="Wrap"/></DockPanel></Button>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource CardH}" Text="Mouse Cursor"/>
+                <Button x:Name="btnCurApply" Style="{StaticResource ActRow}"><DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE7C9;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Windows 11 Dark Cursors - Apply" VerticalAlignment="Center" TextWrapping="Wrap"/></DockPanel></Button>
+                <Button x:Name="btnCurReset" Style="{StaticResource ActRow}"><DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE777;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Default Windows Cursors - Restore" VerticalAlignment="Center" TextWrapping="Wrap"/></DockPanel></Button>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource CardH}" Text="Windows Activation"/>
+                <Button x:Name="btnActCheck" Style="{StaticResource ActRow}"><DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE8D7;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Check Windows Activation (status, edition, key)" VerticalAlignment="Center" TextWrapping="Wrap"/></DockPanel></Button>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource CardH}" Text="Gaming"/>
+                <Button x:Name="btnGameDesk" Style="{StaticResource ActRow}"><DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE7FC;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Best Windows settings for games - Desktop PC" VerticalAlignment="Center" TextWrapping="Wrap"/></DockPanel></Button>
+                <Button x:Name="btnGameLap" Style="{StaticResource ActRow}"><DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE7F8;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Best Windows settings for games - Laptop" VerticalAlignment="Center" TextWrapping="Wrap"/></DockPanel></Button>
+                <Button x:Name="btnGameLoop" Style="{StaticResource ActRow}"><DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Game Loop / Tencent Gaming Buddy - Boost for PUBG Mobile" VerticalAlignment="Center" TextWrapping="Wrap"/></DockPanel></Button>
+                <Button x:Name="btnGameRestore" Style="{StaticResource ActRow}"><DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE777;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Gaming settings - Restore previous settings" VerticalAlignment="Center" TextWrapping="Wrap"/></DockPanel></Button>
+                <TextBlock Foreground="#9AA0B8" FontSize="11.5" TextWrapping="Wrap" Margin="4,6,4,0" Text="Desktop: Game Mode on, game recording off, GPU scheduling on, mouse acceleration off, games get CPU/GPU priority, High performance power plan. Laptop: the same, but the power plan is not changed - full speed, active cooling and no PCIe power saving only while on the charger, so the battery is not affected. Game Loop: high-performance GPU, High CPU priority and no fullscreen optimizations for the emulator, plus the best in-game settings for this PC in the log. A restore point is not needed: every old value is saved and Restore puts it back."/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource CardH}" Text="Shortcut"/>
+                <Button x:Name="btnShortcut" Style="{StaticResource ActRow}"><DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE71B;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Rock Toolbox Shortcut (Rock icon) - Create" VerticalAlignment="Center" TextWrapping="Wrap"/></DockPanel></Button>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+      </Grid>

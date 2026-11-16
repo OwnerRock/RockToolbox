@@ -1,0 +1,37 @@
+﻿      <!-- REPAIR -->
+      <Grid x:Name="pnlRepair" Visibility="Collapsed">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="300"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4" Margin="0,0,10,0" Padding="8">
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+              <TextBlock Style="{StaticResource H}" Text="Repair Windows" Margin="3,4,3,6"/>
+              <Button x:Name="btnRpFull" Content="Full repair (DISM + SFC)" Background="#2F6FB0" ToolTip="Repairs the Windows image first, then the system files. Can take 15-40 minutes."/>
+              <Button x:Name="btnRpSfc" Content="Scan system files (SFC)"/>
+              <Button x:Name="btnRpScan" Content="Check image health (DISM)"/>
+              <Button x:Name="btnRpRestore" Content="Repair image (DISM RestoreHealth)"/>
+              <TextBlock Style="{StaticResource H}" Text="Disk"/>
+              <Button x:Name="btnRpChk" Content="Check disk (read-only scan)"/>
+              <Button x:Name="btnRpChkFix" Content="Repair disk at next restart"/>
+              <TextBlock Style="{StaticResource H}" Text="Maintenance"/>
+              <Button x:Name="btnRpComp" Content="Clean component store (WinSxS)"/>
+              <Button x:Name="btnRpWu" Content="Reset Windows Update components"/>
+              <TextBlock Foreground="#9AA0B8" TextWrapping="Wrap" Margin="4,12,4,0"
+                         Text="Use Stop in the bottom bar to cancel a running scan. Live progress is shown there and the full output on the right."/>
+            </StackPanel>
+          </ScrollViewer>
+        </Border>
+        <DockPanel Grid.Column="1">
+          <WrapPanel DockPanel.Dock="Top">
+            <Button x:Name="btnRpCopy" Content="Copy log" Padding="22,6"/>
+            <Button x:Name="btnRpClear" Content="Clear log" Padding="22,6"/>
+          </WrapPanel>
+          <Border Background="#14171B" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+            <TextBox x:Name="txtRepairLog" IsReadOnly="True" AcceptsReturn="True" TextWrapping="NoWrap" FontFamily="Consolas" FontSize="12.5"
+                     Background="#14171B" Foreground="#E6E8F2" BorderThickness="0" Padding="8"
+                     VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+          </Border>
+        </DockPanel>
+      </Grid>

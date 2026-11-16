@@ -1,0 +1,93 @@
+﻿      <!-- INSTALL -->
+      <Grid x:Name="pnlInstall">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="268"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" Margin="0,0,10,0">
+          <StackPanel>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource CardH}" Text="Actions"/>
+                <Button x:Name="btnInstall" Style="{StaticResource ActPrimary}">
+                <DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE896;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Install / Upgrade Apps" VerticalAlignment="Center"/></DockPanel>
+              </Button>
+              <Button x:Name="btnUninstall" Style="{StaticResource ActRow}">
+                <DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Uninstall Applications" VerticalAlignment="Center"/></DockPanel>
+              </Button>
+              <Button x:Name="btnUpgrade" Style="{StaticResource ActRow}">
+                <DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE895;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Upgrade All Applications" VerticalAlignment="Center"/></DockPanel>
+              </Button>
+              <Button x:Name="btnStopAction" Style="{StaticResource ActDanger}">
+                <DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE71A;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Stop Action" VerticalAlignment="Center"/></DockPanel>
+              </Button>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource CardH}" Text="Package Manager"/>
+                <StackPanel Orientation="Horizontal">
+                  <RadioButton x:Name="rdPkgWinget" Content="WinGet" GroupName="pkgMgr" FontSize="12.5" Margin="2,2,18,2" Foreground="#E6E8F2" IsChecked="True"/>
+                  <RadioButton x:Name="rdPkgChoco" Content="Chocolatey" GroupName="pkgMgr" FontSize="12.5" Margin="2" Foreground="#E6E8F2"/>
+                </StackPanel>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock Style="{StaticResource CardH}" Text="Selection"/>
+                <Border Background="#1E3547" BorderBrush="#35506A" BorderThickness="1" CornerRadius="10" Margin="0,0,0,8" Padding="12,7">
+                  <TextBlock x:Name="txtSelCount" Text="Selected Apps: 0" FontSize="12.5" FontWeight="SemiBold" Foreground="#F0F4FF" HorizontalAlignment="Center"/>
+                </Border>
+              <Button x:Name="btnAppsClear" Style="{StaticResource ActRow}">
+                <DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE894;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Clear Selection" VerticalAlignment="Center"/></DockPanel>
+              </Button>
+              <Button x:Name="btnCollapse" Style="{StaticResource ActRow}">
+                <DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE70E;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Collapse All Categories" VerticalAlignment="Center"/></DockPanel>
+              </Button>
+              <Button x:Name="btnExpand" Style="{StaticResource ActRow}">
+                <DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE70D;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Expand All Categories" VerticalAlignment="Center"/></DockPanel>
+              </Button>
+              <Button x:Name="btnShowInstalled" Style="{StaticResource ActRow}">
+                <DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE71D;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Show Installed Apps" VerticalAlignment="Center"/></DockPanel>
+              </Button>
+              <Button x:Name="btnShowFind" Style="{StaticResource ActRow}" ToolTip="Browse every app in Rock Toolbox with its WinGet and Chocolatey IDs">
+                <DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE8EC;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Package ID" VerticalAlignment="Center"/></DockPanel>
+              </Button>
+              <Button x:Name="btnShowUpg" Style="{StaticResource ActRow}" ToolTip="List the apps that have a newer version and update the ones you tick">
+                <DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE777;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Winget Upgrade" VerticalAlignment="Center"/></DockPanel>
+              </Button>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}">
+              <StackPanel>
+                <TextBlock x:Name="lblCustomHdr" Style="{StaticResource CardH}" Text="Custom winget ID"/>
+                <TextBox x:Name="txtCustomId" Height="32" FontSize="12.5" Margin="0,0,0,8" VerticalContentAlignment="Center" Background="#14171B" Foreground="White" CaretBrush="White" BorderBrush="#35506A"/>
+              <Button x:Name="btnInstallCustom" Style="{StaticResource ActRow}">
+                <DockPanel><TextBlock DockPanel.Dock="Left" Text="&#xE710;" FontFamily="Segoe MDL2 Assets" FontSize="15" Width="26" VerticalAlignment="Center"/><TextBlock Text="Install ID" VerticalAlignment="Center"/></DockPanel>
+              </Button>
+              </StackPanel>
+            </Border>
+          </StackPanel>
+        </ScrollViewer>
+        <Grid Grid.Column="1">
+          <DockPanel x:Name="pnlInstallApps">
+            <Border DockPanel.Dock="Top" Style="{StaticResource Card}" Padding="12,10,12,4" Margin="0,0,0,8">
+              <StackPanel>
+                <Grid Margin="0,0,0,10">
+                  <TextBox x:Name="txtAppSearch" Height="34" VerticalContentAlignment="Center" Padding="34,3,8,3"
+                           Background="#14171B" Foreground="White" CaretBrush="White" BorderBrush="#35506A" ToolTip="Search apps"/>
+                  <TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets" FontSize="14" Foreground="#9AA0B8" Margin="12,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" IsHitTestVisible="False"/>
+                </Grid>
+                <WrapPanel x:Name="chipPanel"/>
+              </StackPanel>
+            </Border>
+            <Border Style="{StaticResource Card}" Padding="0" Margin="0">
+              <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="appsPanel" Margin="12,6,12,10"/>
+              </ScrollViewer>
+            </Border>
+          </DockPanel>
+          <!-- @include ui/pages/WingetId.xaml -->
+          <!-- @include ui/pages/WingetUpgrade.xaml -->
+        </Grid>
+      </Grid>
