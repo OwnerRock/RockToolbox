@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>R-Downloader</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <header>
+      <img src="icons/icon48.png" alt="" width="28" height="28">
+      <div class="title">R-Downloader<span>Downloader</span></div>
+    </header>
+
+    <section class="panel power">
+      <div>
+        <div class="label">Capture downloads</div>
+        <div class="sub" id="powerText">Enabled</div>
+      </div>
+      <label class="switch" aria-label="Capture downloads">
+        <input type="checkbox" id="enabled">
+        <span class="track"><span class="thumb"></span></span>
+      </label>
+    </section>
+
+    <section class="panel status" id="status">
+      <span class="dot"></span>
+      <span id="statusText">Checking...</span>
+    </section>
+
+    <section class="panel fields">
+      <label for="minSize">Minimum size (MB)</label>
+      <input type="number" id="minSize" min="0" step="any" placeholder="0 = all sizes">
+      <label for="exts">File types to catch</label>
+      <input type="text" id="exts" placeholder="empty = all (e.g. zip, exe, mp4)" spellcheck="false" autocomplete="off">
+      <div class="saved" id="saved">Saved</div>
+    </section>
+
+    <section class="panel fields link">
+      <label for="linkUrl">Download a link</label>
+      <div class="row">
+        <input type="text" id="linkUrl" placeholder="Paste a download link (http, https or magnet)" spellcheck="false" autocomplete="off">
+        <button type="button" id="btnPaste" title="Paste from the clipboard">Paste</button>
+      </div>
+      <button type="button" id="btnSend" class="primary">Send to R-Downloader</button>
+      <div class="msg" id="linkMsg"></div>
+    </section>
+
+    <p class="hint">R-Downloader cannot be opened from the browser. Start it from the desktop; if it is not running, downloads stay with the browser.</p>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

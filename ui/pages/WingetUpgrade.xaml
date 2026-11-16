@@ -1,0 +1,33 @@
+﻿      <!-- WINGET UPGRADE -->
+      <DockPanel x:Name="pnlUpg" Visibility="Collapsed">
+        <WrapPanel DockPanel.Dock="Top">
+          <Button x:Name="btnUpgScan" Content="Check for updates" Padding="22,6"/>
+          <Button x:Name="btnUpgRun" Content="Update selected" Background="#2F6FB0" Padding="22,6"/>
+          <Button x:Name="btnUpgAll" Content="Update all" Padding="22,6"/>
+          <Button x:Name="btnUpgSelAll" Content="Select all"/>
+          <Button x:Name="btnUpgSelNone" Content="Select none"/>
+          <TextBlock x:Name="txtUpgCount" Text="Selected: 0 of 0" Foreground="#4FD1FF" FontFamily="Consolas" VerticalAlignment="Center" Margin="10,0"/>
+        </WrapPanel>
+        <TextBlock x:Name="txtUpgInfo" DockPanel.Dock="Bottom" Foreground="#9AA0B8" Margin="8,6" TextWrapping="Wrap"
+                   Text="Press Check for updates to list the apps that have a newer version."/>
+        <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+          <ListView x:Name="lvUpg" Background="#1B1F24" Foreground="#E6E8F2" BorderThickness="0" SelectionMode="Single">
+            <ListView.View>
+              <GridView>
+                <GridViewColumn Width="46">
+                  <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                      <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" HorizontalAlignment="Center" Margin="0"/>
+                    </DataTemplate>
+                  </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="300"/>
+                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}" Width="300"/>
+                <GridViewColumn Header="Current" DisplayMemberBinding="{Binding Version}" Width="120"/>
+                <GridViewColumn Header="Available" DisplayMemberBinding="{Binding Available}" Width="120"/>
+                <GridViewColumn Header="Source" DisplayMemberBinding="{Binding Source}" Width="80"/>
+              </GridView>
+            </ListView.View>
+          </ListView>
+        </Border>
+      </DockPanel>

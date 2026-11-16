@@ -1,0 +1,14 @@
+﻿      <!-- SYSTEM INFO -->
+      <DockPanel x:Name="pnlSysInfo" Visibility="Collapsed">
+        <WrapPanel DockPanel.Dock="Top">
+          <Button x:Name="btnSiRefresh" Content="Refresh" Padding="22,6"/>
+          <Button x:Name="btnSiCopy" Content="Copy report" Padding="22,6"/>
+          <Button x:Name="btnSiSave" Content="Save report..." Padding="22,6"/>
+        </WrapPanel>
+        <TextBlock x:Name="txtSiInfo" DockPanel.Dock="Bottom" Foreground="#9AA0B8" Margin="8,6" TextWrapping="Wrap"/>
+        <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="siPanel" Margin="12,4,12,12"/>
+          </ScrollViewer>
+        </Border>
+      </DockPanel>

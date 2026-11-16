@@ -1,0 +1,24 @@
+﻿      <!-- DEBLOAT -->
+      <DockPanel x:Name="pnlDebloat" Visibility="Collapsed">
+        <WrapPanel DockPanel.Dock="Top">
+          <Button x:Name="btnDebloat" Content="Remove Selected" Background="#B0343A" Padding="20,7"/>
+          <Button x:Name="btnDebRec" Content="Select Recommended" Padding="20,7"/>
+          <Button x:Name="btnDebInst" Content="Select Installed" Padding="20,7"/>
+          <Button x:Name="btnDebAll" Content="Select All" Padding="20,7"/>
+          <Button x:Name="btnDebClear" Content="Clear" Padding="20,7"/>
+        </WrapPanel>
+        <TextBlock DockPanel.Dock="Top" Foreground="#9AA0B8" Margin="8,2,8,8" TextWrapping="Wrap"
+                   Text="Removes the app for all users and from the provisioned list (so it does not come back for new users). You can reinstall from the Microsoft Store."/>
+        <Border Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="4">
+          <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid x:Name="debloatPanel" Margin="8">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <StackPanel x:Name="debloatColL" Grid.Column="0" Margin="0,0,10,0"/>
+              <StackPanel x:Name="debloatColR" Grid.Column="1" Margin="10,0,0,0"/>
+            </Grid>
+          </ScrollViewer>
+        </Border>
+      </DockPanel>

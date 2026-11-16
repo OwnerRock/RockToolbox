@@ -1,0 +1,56 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+        Title="R-Downloader - Download complete" Width="500" Height="300" ResizeMode="NoResize" WindowStyle="None" ShowInTaskbar="True"
+        WindowStartupLocation="CenterScreen" Background="#1B2027" BorderBrush="#313B47" BorderThickness="1" FontFamily="Segoe UI" FontSize="12" Foreground="#E4E9F0" UseLayoutRounding="True" TextOptions.TextFormattingMode="Display">
+  <shell:WindowChrome.WindowChrome><shell:WindowChrome CaptionHeight="32" ResizeBorderThickness="0" GlassFrameThickness="0" CornerRadius="0" UseAeroCaptionButtons="False"/></shell:WindowChrome.WindowChrome>
+  <Window.Resources>
+    <!-- @include ui/CalmStyles.xaml -->
+  </Window.Resources>
+  <Grid x:Name="root">
+    <Grid.RowDefinitions><RowDefinition Height="32"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+      <Border Grid.Row="0" Background="#171C22" BorderBrush="#2A323C" BorderThickness="0,0,0,1">
+        <DockPanel>
+          <Button x:Name="btnClose" DockPanel.Dock="Right" Width="40" Style="{StaticResource CalmClose}" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+            <Path Data="M0,0 L10,10 M10,0 L0,10" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" StrokeThickness="1.3" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Width="10" Height="10"/>
+          </Button>
+          <Button x:Name="btnMin" DockPanel.Dock="Right" Width="40" Style="{StaticResource CalmMin}" shell:WindowChrome.IsHitTestVisibleInChrome="True">
+            <Path Data="M0,0 L10,0" Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Button}}" StrokeThickness="1.3" Width="10" Height="2"/>
+          </Button>
+          <TextBlock Text="&#xE896;" FontFamily="Segoe MDL2 Assets" Foreground="#4DA3C4" FontSize="13" VerticalAlignment="Center" Margin="11,0,8,0"/>
+          <TextBlock x:Name="txtTitle" Text="Download complete" VerticalAlignment="Center" Foreground="#C9D2DD" FontSize="12" TextTrimming="CharacterEllipsis"/>
+        </DockPanel>
+      </Border>
+
+    <Grid Grid.Row="1" Margin="22,18,22,18">
+      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+      <Grid Grid.Row="0">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+        <Grid Width="54" Height="54" Margin="0,0,16,0" RenderTransformOrigin="0.5,0.5" x:Name="badge">
+          <Grid.RenderTransform><ScaleTransform x:Name="badgeScale" ScaleX="0.2" ScaleY="0.2"/></Grid.RenderTransform>
+          <Ellipse x:Name="badgeRing" Fill="#1E3A33" Stroke="#52B788" StrokeThickness="2"/>
+          <Path x:Name="badgeCheck" Data="M16,28 L24,36 L39,19" Stroke="#52B788" StrokeThickness="3.4" StrokeStartLineCap="Round" StrokeEndLineCap="Round" StrokeLineJoin="Round" Width="54" Height="54"/>
+        </Grid>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+          <TextBlock x:Name="hdr" Text="Download complete" FontSize="19" FontWeight="SemiBold" Foreground="#E4E9F0"/>
+          <TextBlock x:Name="vName" Margin="0,3,0,0" Foreground="#AAB6C4" TextTrimming="CharacterEllipsis" FontSize="12.5"/>
+        </StackPanel>
+      </Grid>
+      <Border Grid.Row="1" x:Name="card" Margin="0,16,0,0" Background="#232A33" BorderBrush="#313B47" BorderThickness="1" CornerRadius="8" Padding="14,10">
+        <Grid>
+          <Grid.ColumnDefinitions><ColumnDefinition Width="90"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+          <Grid.RowDefinitions><RowDefinition Height="24"/><RowDefinition Height="24"/><RowDefinition Height="24"/></Grid.RowDefinitions>
+          <TextBlock Text="File size" Foreground="#8895A6" VerticalAlignment="Center"/><TextBlock x:Name="vSize" Grid.Column="1" VerticalAlignment="Center"/>
+          <TextBlock Grid.Row="1" Text="Saved to" Foreground="#8895A6" VerticalAlignment="Center"/><TextBlock x:Name="vPath" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+          <TextBlock Grid.Row="2" Text="Address" Foreground="#8895A6" VerticalAlignment="Center"/><TextBlock x:Name="vUrl" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" FontFamily="Consolas" FontSize="11.5"/>
+        </Grid>
+      </Border>
+      <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+        <Button x:Name="btnOpen" Content="Open" Style="{StaticResource CalmBtn}" Padding="12,6" MinWidth="96"/>
+        <Button x:Name="btnFolder" Content="Open folder" Style="{StaticResource CalmGhost}" Margin="6,0,0,0" Padding="12,6" MinWidth="96"/>
+        <Button x:Name="btnDone" Content="Close" Style="{StaticResource CalmGhost}" Margin="6,0,0,0" Padding="12,6" MinWidth="96"/>
+      </StackPanel>
+    </Grid>
+    <TextBlock x:Name="txtState" Visibility="Collapsed"/>
+  </Grid>
+</Window>
