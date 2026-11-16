@@ -1,0 +1,251 @@
+﻿      <!-- DOWNLOADS (IDM-style: big toolbar, categories tree, list) -->
+      <DockPanel x:Name="pnlDownloads" Visibility="Collapsed">
+        <DockPanel.Resources>
+          <Style x:Key="IdmBtn" TargetType="Button">
+            <Setter Property="Foreground" Value="#E6E8F2"/><Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="1,0"/><Setter Property="Padding" Value="8,6,8,5"/><Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="MinWidth" Value="62"/>
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                  <Grid x:Name="pr" RenderTransformOrigin="0.5,0.5">
+                    <Grid.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></Grid.RenderTransform>
+                    <Border x:Name="bd" CornerRadius="7" Background="{TemplateBinding Background}" BorderBrush="Transparent" BorderThickness="1"/>
+                    <Border x:Name="hl" CornerRadius="7" Background="#9AA0B8" Opacity="0"/>
+                    <ContentPresenter Margin="{TemplateBinding Padding}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                  </Grid>
+                  <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                      <Trigger.EnterActions><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="hl" Storyboard.TargetProperty="Opacity" To="0.16" Duration="0:0:0.12"/></Storyboard></BeginStoryboard></Trigger.EnterActions>
+                      <Trigger.ExitActions><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="hl" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2"/></Storyboard></BeginStoryboard></Trigger.ExitActions>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                      <Trigger.EnterActions><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="pr" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="0.93" Duration="0:0:0.06"/><DoubleAnimation Storyboard.TargetName="pr" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="0.93" Duration="0:0:0.06"/></Storyboard></BeginStoryboard></Trigger.EnterActions>
+                      <Trigger.ExitActions><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="pr" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" To="1" Duration="0:0:0.14"/><DoubleAnimation Storyboard.TargetName="pr" Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" To="1" Duration="0:0:0.14"/></Storyboard></BeginStoryboard></Trigger.ExitActions>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False"><Setter TargetName="pr" Property="Opacity" Value="0.4"/></Trigger>
+                  </ControlTemplate.Triggers>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style>
+
+          <Style TargetType="TreeViewItem">
+            <Setter Property="Foreground" Value="#E6E8F2"/><Setter Property="Cursor" Value="Hand"/><Setter Property="IsExpanded" Value="True"/>
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="TreeViewItem">
+                  <StackPanel>
+                    <Grid x:Name="hd" Margin="0,1">
+                      <Border x:Name="hl" CornerRadius="6" Background="#9AA0B8" Opacity="0"/>
+                      <Border x:Name="sel" CornerRadius="6" Background="#4A78B0" Opacity="0"/>
+                      <Rectangle x:Name="bar" Width="3" HorizontalAlignment="Left" Margin="0,6" RadiusX="2" RadiusY="2" Fill="#4FD1FF" Opacity="0"/>
+                      <DockPanel>
+                        <ToggleButton x:Name="Expander" DockPanel.Dock="Left" IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" ClickMode="Press" Width="18" Focusable="False" Margin="2,0,0,0">
+                          <ToggleButton.Template><ControlTemplate TargetType="ToggleButton"><Border Background="Transparent" Height="24"><Path x:Name="ar" Data="M0,0 L4,4 L0,8" Stroke="#9AA0B8" StrokeThickness="1.5" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.4,0.5"><Path.RenderTransform><RotateTransform Angle="0"/></Path.RenderTransform></Path></Border>
+                            <ControlTemplate.Triggers><Trigger Property="IsChecked" Value="True"><Setter TargetName="ar" Property="RenderTransform"><Setter.Value><RotateTransform Angle="90"/></Setter.Value></Setter></Trigger></ControlTemplate.Triggers></ControlTemplate></ToggleButton.Template>
+                        </ToggleButton>
+                        <ContentPresenter x:Name="PART_Header" ContentSource="Header" Margin="2,4,8,4" VerticalAlignment="Center"/>
+                      </DockPanel>
+                    </Grid>
+                    <ItemsPresenter x:Name="ItemsHost" Margin="16,0,0,0"/>
+                  </StackPanel>
+                  <ControlTemplate.Triggers>
+                    <Trigger Property="HasItems" Value="False"><Setter TargetName="Expander" Property="Visibility" Value="Hidden"/></Trigger>
+                    <Trigger Property="IsExpanded" Value="False"><Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed"/></Trigger>
+                    <Trigger SourceName="hd" Property="IsMouseOver" Value="True">
+                      <Trigger.EnterActions><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="hl" Storyboard.TargetProperty="Opacity" To="0.14" Duration="0:0:0.12"/></Storyboard></BeginStoryboard></Trigger.EnterActions>
+                      <Trigger.ExitActions><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="hl" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2"/></Storyboard></BeginStoryboard></Trigger.ExitActions>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="True">
+                      <Trigger.EnterActions><BeginStoryboard><Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="sel" Storyboard.TargetProperty="Opacity" To="0.55" Duration="0:0:0.16"/>
+                        <DoubleAnimation Storyboard.TargetName="bar" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2"/>
+                      </Storyboard></BeginStoryboard></Trigger.EnterActions>
+                      <Trigger.ExitActions><BeginStoryboard><Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="sel" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2"/>
+                        <DoubleAnimation Storyboard.TargetName="bar" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2"/>
+                      </Storyboard></BeginStoryboard></Trigger.ExitActions>
+                    </Trigger>
+                  </ControlTemplate.Triggers>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style>
+
+          <Style TargetType="ListViewItem">
+            <Setter Property="Foreground" Value="#E6E8F2"/><Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/><Setter Property="Padding" Value="0,5"/>
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                  <Grid x:Name="root" SnapsToDevicePixels="True">
+                    <Border x:Name="alt" Background="#23272D" Opacity="0"/>
+                    <Border x:Name="hl" Background="#9AA0B8" Opacity="0"/>
+                    <Border x:Name="sel" Background="#4A78B0" Opacity="0"/>
+                    <Rectangle x:Name="bar" Width="3" HorizontalAlignment="Left" Fill="#4FD1FF" Opacity="0"/>
+                    <GridViewRowPresenter Margin="{TemplateBinding Padding}" VerticalAlignment="Center" Content="{TemplateBinding Content}" Columns="{Binding Path=View.Columns, RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                  </Grid>
+                  <ControlTemplate.Triggers>
+                    <Trigger Property="ItemsControl.AlternationIndex" Value="1"><Setter TargetName="alt" Property="Opacity" Value="0.6"/></Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                      <Trigger.EnterActions><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="hl" Storyboard.TargetProperty="Opacity" To="0.12" Duration="0:0:0.1"/></Storyboard></BeginStoryboard></Trigger.EnterActions>
+                      <Trigger.ExitActions><BeginStoryboard><Storyboard><DoubleAnimation Storyboard.TargetName="hl" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.18"/></Storyboard></BeginStoryboard></Trigger.ExitActions>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="True">
+                      <Trigger.EnterActions><BeginStoryboard><Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="sel" Storyboard.TargetProperty="Opacity" To="0.55" Duration="0:0:0.12"/>
+                        <DoubleAnimation Storyboard.TargetName="bar" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.16"/>
+                      </Storyboard></BeginStoryboard></Trigger.EnterActions>
+                      <Trigger.ExitActions><BeginStoryboard><Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="sel" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.18"/>
+                        <DoubleAnimation Storyboard.TargetName="bar" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.18"/>
+                      </Storyboard></BeginStoryboard></Trigger.ExitActions>
+                    </Trigger>
+                  </ControlTemplate.Triggers>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </DockPanel.Resources>
+
+        <!-- toolbar of big icons -->
+        <Border x:Name="brDlHead" DockPanel.Dock="Top" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="8" Padding="6,6" Margin="0,0,0,8">
+          <WrapPanel x:Name="wpDlBar">
+              <Button x:Name="btnDlAdd" Style="{StaticResource IdmBtn}" ToolTip="Paste a link (or a magnet) and see its details before it downloads">
+                <StackPanel><TextBlock Text="&#xE710;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#52B788" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Add URL" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlResume" Style="{StaticResource IdmBtn}" ToolTip="Resume the selected downloads">
+                <StackPanel><TextBlock Text="&#xE768;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#4FD1FF" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Resume" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlPause" Style="{StaticResource IdmBtn}" ToolTip="Stop (pause) the selected downloads">
+                <StackPanel><TextBlock Text="&#xE71A;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#E0A76B" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Stop" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlStopAll" Style="{StaticResource IdmBtn}" ToolTip="Stop every running download">
+                <StackPanel><TextBlock Text="&#xE769;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#E0A76B" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Stop All" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlCancel" Style="{StaticResource IdmBtn}" ToolTip="Cancel the selected downloads and delete their partial files">
+                <StackPanel><TextBlock Text="&#xE74D;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#E5827F" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Delete" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlClear" Style="{StaticResource IdmBtn}" ToolTip="Remove finished downloads from the list">
+                <StackPanel><TextBlock Text="&#xE73E;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#4FD1FF" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Delete Completed" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlSettings" Style="{StaticResource IdmBtn}" ToolTip="Save folder, simultaneous downloads, connections and speed limit">
+                <StackPanel><TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#9AA0B8" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Options" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlStartQ" Style="{StaticResource IdmBtn}" ToolTip="Let waiting downloads start again and resume the stopped ones">
+                <StackPanel><TextBlock Text="&#xE102;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#52B788" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Start Queue" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlStopQ" Style="{StaticResource IdmBtn}" ToolTip="Do not start waiting downloads (running ones keep going)">
+                <StackPanel><TextBlock Text="&#xE15B;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#E0A76B" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Stop Queue" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlAddMany" Style="{StaticResource IdmBtn}" ToolTip="Paste a whole list of links at once">
+                <StackPanel><TextBlock Text="&#xE8C8;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#4FD1FF" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Add Many" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlGrab" Style="{StaticResource IdmBtn}" ToolTip="Collect the download links of a web page (Grabber)">
+                <StackPanel><TextBlock Text="&#xE721;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#4FD1FF" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Grabber" FontSize="11" HorizontalAlignment="Center" Margin="0,3,0,0"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlRlist" Style="{StaticResource IdmBtn}" ToolTip="Open a .Rlist file (a playlist of download links)">
+                <StackPanel><TextBlock Text="&#xE71D;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#4FD1FF" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Rlist" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlExt" Style="{StaticResource IdmBtn}" ToolTip="Send downloads from Edge, Chrome, Brave, Opera or Firefox to R-Downloader">
+                <StackPanel><TextBlock Text="&#xE774;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#4FD1FF" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Extension" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+              <Button x:Name="btnDlOpen" Style="{StaticResource IdmBtn}" ToolTip="Show the selected file in its folder">
+                <StackPanel><TextBlock Text="&#xE8B7;" FontFamily="Segoe MDL2 Assets" FontSize="21" Foreground="#4FD1FF" HorizontalAlignment="Center" RenderTransformOrigin="0.5,0.5"><TextBlock.RenderTransform><ScaleTransform ScaleX="1" ScaleY="1"/></TextBlock.RenderTransform></TextBlock><TextBlock Text="Open Folder" FontSize="11" Margin="0,4,0,0" HorizontalAlignment="Center"/></StackPanel>
+              </Button>
+          </WrapPanel>
+        </Border>
+
+        <Border x:Name="brDlSave" DockPanel.Dock="Top" Visibility="Collapsed" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="8" Padding="12,10" Margin="0,0,0,8">
+          <WrapPanel>
+            <TextBlock Text="Save to:" Foreground="#C9CDE0" VerticalAlignment="Center" Margin="6,0,6,0"/>
+            <TextBox x:Name="txtDlDir" Width="340" Height="28" VerticalContentAlignment="Center" FontFamily="Consolas"/>
+            <Button x:Name="btnDlBrowse" Content="Browse..." Padding="14,4"/>
+            <TextBlock Text="Simultaneous:" Foreground="#C9CDE0" VerticalAlignment="Center" Margin="18,0,6,0"/>
+            <ComboBox x:Name="cmbDlMax" Width="64" Height="28" VerticalContentAlignment="Center"/>
+            <TextBlock Text="Connections:" Foreground="#C9CDE0" VerticalAlignment="Center" Margin="18,0,6,0"/>
+            <ComboBox x:Name="cmbDlConn" Width="64" Height="28" VerticalContentAlignment="Center"/>
+            <TextBlock Text="Speed limit:" Foreground="#C9CDE0" VerticalAlignment="Center" Margin="18,0,6,0"/>
+            <ComboBox x:Name="cmbDlLimit" Width="120" Height="28" VerticalContentAlignment="Center"/>
+          </WrapPanel>
+        </Border>
+
+        <!-- status strip -->
+        <Border DockPanel.Dock="Bottom" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="8" Padding="12,6" Margin="0,8,0,0">
+          <DockPanel>
+            <TextBlock x:Name="txtDlCount" DockPanel.Dock="Right" Text="Selected: 0 of 0" Foreground="#4FD1FF" FontFamily="Consolas"/>
+            <TextBlock x:Name="txtDlInfo" Foreground="#9AA0B8" FontSize="12" TextTrimming="CharacterEllipsis"/>
+          </DockPanel>
+        </Border>
+
+        <!-- categories -->
+        <Border DockPanel.Dock="Left" Width="190" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="8" Margin="0,0,8,0" Padding="4,6">
+          <DockPanel>
+            <TextBlock DockPanel.Dock="Top" Text="Categories" Foreground="#9AA0B8" FontSize="11" FontWeight="SemiBold" Margin="10,2,0,6"/>
+            <TreeView x:Name="tvDlCats" Background="Transparent" BorderThickness="0" Foreground="#E6E8F2"/>
+          </DockPanel>
+        </Border>
+
+        <!-- list -->
+        <Border x:Name="brDlList" Background="#1B1F24" BorderBrush="#2B3038" BorderThickness="1" CornerRadius="8">
+          <DockPanel>
+            <DockPanel DockPanel.Dock="Top" Margin="8,8,8,6">
+              <TextBox x:Name="txtDlSearch" Width="240" Height="28" DockPanel.Dock="Right" VerticalContentAlignment="Center" ToolTip="Search by name or link"/>
+              <TextBlock x:Name="txtDlCat" Text="All Downloads" FontSize="14" FontWeight="SemiBold" Foreground="#F2F4FF" VerticalAlignment="Center" Margin="4,0,0,0"/>
+            </DockPanel>
+            <ListView x:Name="lvDownloads" Background="Transparent" Foreground="#E6E8F2" BorderThickness="0" SelectionMode="Extended" AlternationCount="2">
+              <ListView.View>
+                <GridView>
+                  <GridViewColumn Header="File Name" Width="270">
+                    <GridViewColumn.CellTemplate>
+                      <DataTemplate>
+                        <DockPanel>
+                          <Grid DockPanel.Dock="Left" Width="26" Height="22"><TextBlock Text="{Binding ListGlyph}" FontFamily="Segoe MDL2 Assets" FontSize="16" Foreground="{Binding GlyphColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/><Image Source="{Binding FileIcon}" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/></Grid>
+                          <TextBlock Text="{Binding FileName}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" ToolTip="{Binding Url}"/>
+                        </DockPanel>
+                      </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                  </GridViewColumn>
+                  <GridViewColumn Header="Size" DisplayMemberBinding="{Binding SizeText}" Width="84"/>
+                  <GridViewColumn Header="Status" Width="150">
+                    <GridViewColumn.CellTemplate>
+                      <DataTemplate>
+                        <StackPanel VerticalAlignment="Center">
+                          <TextBlock Text="{Binding StatusLine}">
+                            <TextBlock.Style>
+                              <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="#9AA0B8"/>
+                                <Style.Triggers>
+                                  <DataTrigger Binding="{Binding Status}" Value="Downloading"><Setter Property="Foreground" Value="#4FD1FF"/></DataTrigger>
+                                  <DataTrigger Binding="{Binding Status}" Value="Completed"><Setter Property="Foreground" Value="#3DDC84"/></DataTrigger>
+                                  <DataTrigger Binding="{Binding Status}" Value="Paused"><Setter Property="Foreground" Value="#FFB454"/></DataTrigger>
+                                  <DataTrigger Binding="{Binding Status}" Value="Failed"><Setter Property="Foreground" Value="#FF5555"/></DataTrigger>
+                                </Style.Triggers>
+                              </Style>
+                            </TextBlock.Style>
+                          </TextBlock>
+                          <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress, Mode=OneWay}" Height="4" Margin="0,3,10,0" Background="#0F1116" BorderThickness="0">
+                            <ProgressBar.Style>
+                              <Style TargetType="ProgressBar">
+                                <Setter Property="Foreground" Value="#4FD1FF"/><Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                  <DataTrigger Binding="{Binding Status}" Value="Downloading"><Setter Property="Visibility" Value="Visible"/></DataTrigger>
+                                  <DataTrigger Binding="{Binding Status}" Value="Paused"><Setter Property="Visibility" Value="Visible"/><Setter Property="Foreground" Value="#FFB454"/></DataTrigger>
+                                </Style.Triggers>
+                              </Style>
+                            </ProgressBar.Style>
+                          </ProgressBar>
+                        </StackPanel>
+                      </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                  </GridViewColumn>
+                  <GridViewColumn Header="Time left" DisplayMemberBinding="{Binding EtaText}" Width="86"/>
+                  <GridViewColumn Header="Transfer rate" DisplayMemberBinding="{Binding SpeedText}" Width="104"/>
+                  <GridViewColumn Header="Last Try Date" DisplayMemberBinding="{Binding LastTry}" Width="140"/>
+                </GridView>
+              </ListView.View>
+            </ListView>
+          </DockPanel>
+        </Border>
+      </DockPanel>
